@@ -1,7 +1,7 @@
 export * from "./Com";
 export * from "./AppState";
 export * from "./HMI";
-export * from "./Devices/BaseDevice";
+export * from "./Devices/Device";
 export * from "./Machine";
 export * from "./RackData";
 export * from "./GlobalConstants";
@@ -10,3 +10,4 @@ export * from "./RecipeManagerFB";
 export * from "./UserManagerFB";
 export * from "./TaskQueue";
 export * from "./RobData";
+export * from "./Devices";
