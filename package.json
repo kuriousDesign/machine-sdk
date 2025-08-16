@@ -1,0 +1,30 @@
+{
+  "name": "@kuriousdesign/machine-sdk",
+  "version": "1.0.1",
+  "description": "Shared data types and helpers for machine-related repositories",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "machine",
+    "sdk",
+    "data-types",
+    "helpers"
+  ],
+  "author": "kuriousdesign (https://github.com/kuriousDesign)",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuriousDesign/machine-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kuriousDesign/machine-sdk/issues"
+  },
+  "homepage": "https://github.com/kuriousDesign/machine-sdk#readme"
+}

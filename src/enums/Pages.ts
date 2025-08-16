@@ -1,0 +1,21 @@
+export enum Page {
+  UNCONTROLLED = 0,
+  LOGIN = 1,
+  OPERATION = 2,
+  HOME = 3,
+  SETTINGS = 4,
+
+  RAW_SHELF = 5,
+  EDIT_RAW_SHELF = 6,
+  DONE_SHELF = 7,
+  EDIT_DONE_SHELF = 8,
+
+  RECIPES = 9,
+  EDIT_RECIPES = 10,
+  CHANGE_RECIPE = 11,
+  JOB_SETUP = 13,
+
+  ERRORS = 14,
+  WARNINGS = 15,
+  ROBOT = 16,
+}
