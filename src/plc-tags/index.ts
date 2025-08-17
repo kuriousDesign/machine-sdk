@@ -13,4 +13,12 @@ export const MachineTags = {
     HeartbeatHMI: 'HeartbeatHMI'
 }
 
+export const DeviceTags = {
+    Cfg: 'Cfg',
+    Is: 'Is',
+    Registration: 'Registration',
+}
+
+
 export * from "./opcua";
+export * from "./mqtt";

@@ -8,6 +8,14 @@ export interface DeviceRegistration {
   deviceType: DeviceTypes; // type of the device
 }
 
+export const initialDeviceRegistration: DeviceRegistration = {
+  mnemonic: '',
+  id: 0,
+  childIdArray: [],
+  parentId: 0,
+  deviceType: DeviceTypes.Base // Assuming Unknown exists in DeviceTypes enum
+};
+
 export interface DeviceCfg {
   safetyZoneId: number;
   controllableByHmi: boolean;
@@ -15,6 +23,13 @@ export interface DeviceCfg {
   ignore: boolean;
   //ignore--OutboundAxisInterlocks: AxisInterlockCfgData[];
 }
+
+export const initialDeviceCfg: DeviceCfg = {
+  safetyZoneId: 0,
+  controllableByHmi: false,
+  autoReset: false,
+  ignore: false
+};
 
 export interface FaultData {
   DeviceId: number;
@@ -28,12 +43,29 @@ export interface FaultData {
   ParentStepNum: number;
 }
 
+export const initialFaultData: FaultData = {
+  DeviceId: 0,
+  Code: 0,
+  Msg: '',
+  AutoReset: false,
+  ResetFlag: false,
+  LogFlag: false,
+  TimeStamp: new Date(),
+  StepNum: 0,
+  ParentStepNum: 0
+};
 
 export interface DeviceFaultData {
   List: FaultData[]; // Array of fault data
   Present: boolean; // status
   ChildrenPresent: boolean; // status that children have errors
 }
+
+export const initialDeviceFaultData: DeviceFaultData = {
+  List: [],
+  Present: false,
+  ChildrenPresent: false
+};
 
 export interface DeviceStatus {
   state: number; // enum for States enum, same as the boolean states in the data structure
@@ -73,6 +105,36 @@ export interface DeviceStatus {
   recordingLogs: boolean;
 }
 
+export const initialDeviceStatus: DeviceStatus = {
+  state: 0,
+  stepNum: 0,
+  stepDescription: '',
+  colorCode: 0,
+  statusMsg: '',
+  error: false,
+  killed: false,
+  inactive: false,
+  resetting: false,
+  idle: false,
+  running: false,
+  stopping: false,
+  paused: false,
+  aborting: false,
+  done: false,
+  manual: false,
+  idleOrError: false,
+  iifkm: false,
+  rri: false,
+  ipr: false,
+  kei: false,
+  runningOrStopping: false,
+  allChildrenIdle: false,
+  allChildrenKilled: false,
+  allChildrenInactive: false,
+  allChildrenIdleOrError: false,
+  commanderId: 0,
+  recordingLogs: false
+};
 
 export interface Device {
   is: DeviceStatus;
@@ -95,3 +157,12 @@ export interface Device {
   //ignore--instantsapiOpcua: ApiOpcuaData;
   //ignore--instantsudp: UdpData;
 }
+
+export const initialDevice: Device = {
+  is: initialDeviceStatus,
+  errors: initialDeviceFaultData,
+  warnings: initialDeviceFaultData,
+  registration: initialDeviceRegistration,
+  cfg: initialDeviceCfg,
+  connectionStatus: false
+};
