@@ -1,41 +1,97 @@
-export interface DeviceCfg {
-  mnemonic: string; //short hand notation for the device, e.g. ROB for Robot
-  id: number; //calculation using ChildId and Parent Id, where Id = (100*ParentId + LocalId)
-  childId: number;
-  parentId: number;
+import { DeviceTypes } from './DeviceTypes'
+
+export interface DeviceRegistration {
+  mnemonic: string; // short hand notation for the device, e.g. IB for Bufferwall, IBG for gantry
+  id: number; // this device id
+  childIdArray: number[]; // array of child device ids
+  parentId: number; // this is the parent id
+  deviceType: DeviceTypes; // type of the device
 }
+
+export interface DeviceCfg {
+  safetyZoneId: number;
+  controllableByHmi: boolean;
+  autoReset: boolean;
+  ignore: boolean;
+  //ignore--OutboundAxisInterlocks: AxisInterlockCfgData[];
+}
+
+export interface FaultData {
+  DeviceId: number;
+  Code: number; // this is deprecated
+  Msg: string;
+  AutoReset: boolean; // if this is true, the code will be reset by the fault monitor
+  ResetFlag: boolean; // used by the fault monitor to know whether to clear an fault or not
+  LogFlag: boolean; // when true, this fault hasn't been logged yet
+  TimeStamp: Date;
+  StepNum: number; // of this device
+  ParentStepNum: number;
+}
+
 
 export interface DeviceFaultData {
-  list: number[];
-  present: boolean; //status
-}
-
-export interface DeviceInputs {
-  instantKill_ON: boolean
-}
-
-export interface DeviceParentCmds {
-  reset: boolean;
-  stop: boolean;
-  clearFlts: boolean;
-  start: boolean;
-  abort: boolean;
-  kill: boolean;
+  List: FaultData[]; // Array of fault data
+  Present: boolean; // status
+  ChildrenPresent: boolean; // status that children have errors
 }
 
 export interface DeviceStatus {
-  state: number;
-  //Faulted: BOOL;
-  //HasWarnings: BOOL;
+  state: number; // enum for States enum, same as the boolean states in the data structure
   stepNum: number;
-  colorCode: number; //color to indicate the current status
+  stepDescription: string;
+  
+  colorCode: number; // color to indicate the current status for HMI purposes
+  statusMsg: string; // status string
+  
+  error: boolean; // state, device or child has an error
+  killed: boolean; // device is de-energized
+  inactive: boolean; // waiting to be reset
+  resetting: boolean; // taking action to be idle
+  idle: boolean; // ready for auto tasks
+  running: boolean; // performing an active task (excludes tasks that just involve data exchange like recipe changing)
+  stopping: boolean;
+  paused: boolean; // action paused mid-task, able to be resumed (finish the task) or stopped (abandon task and back to idle or inactive)
+  aborting: boolean; // Aborting (Reacting TO E-Stop)
+  done: boolean; // finished with task, waiting for parent to drop the request
+  manual: boolean;
+
+  idleOrError: boolean; // useful to check for stopping
+  iifkm: boolean; // IdleOrInactiveOrFaultedOrKilledOrManual
+  rri: boolean; // ResettingOrRunningOrIdle
+  ipr: boolean; // IdleOrPausedOrRunning
+  kei: boolean; // KilledErrorOrInactive
+  runningOrStopping: boolean;
+  
+  // Children Status
+  allChildrenIdle: boolean;
+  allChildrenKilled: boolean;
+  allChildrenInactive: boolean;
+  allChildrenIdleOrError: boolean;
+  
+  commanderId: number; // used for external control
+  
+  recordingLogs: boolean;
 }
 
+
 export interface Device {
-  cfg: DeviceCfg;
   is: DeviceStatus;
-  cmds: DeviceParentCmds;
   errors: DeviceFaultData;
   warnings: DeviceFaultData;
-  i: DeviceInputs;
+  registration: DeviceRegistration;
+  cfg: DeviceCfg;
+  //ignore--instants: DeviceInstants;
+
+  //ignore--instantsexecMethod: ProcessData;
+  //ignore--instantstask: ProcessData;
+  //ignore--instantsprocess: ProcessData; //read-only
+  //ignore--instantsscript: ProcessData; //read-only
+
+  //ignore--instantsmission: ProcessData;
+  //ignore--instantssettings: DeviceSettings;
+  connectionStatus: boolean;
+
+  //ignore--instantsrequests: Array<DeviceActionRequestData>; //this can be written to outside of the device fb;
+  //ignore--instantsapiOpcua: ApiOpcuaData;
+  //ignore--instantsudp: UdpData;
 }
