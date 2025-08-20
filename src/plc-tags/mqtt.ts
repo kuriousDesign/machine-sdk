@@ -5,4 +5,12 @@ export interface TopicData {
 
 export const MqttTopics = {
     BRIDGE_STATUS: 'bridge/status',
+    BRIDGE_CMD: 'bridge/cmd',
+    DEVICE_MAP: 'deviceMap',
+} as const;
+
+
+export const BridgeCmds = {
+    CONNECT: 'connect',
+    DISCONNECT: 'disconnect'
 } as const;
