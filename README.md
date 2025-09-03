@@ -1,7 +1,17 @@
-@kuriousdesign/machine-sdk
+# npm install @kuriousdesign/machine-sdk
 A shared SDK for data types and helper functions used in machine-related repositories.
-Installation
-npm install @kuriousdesign/machine-sdk
+
+# Publishing to npm
+first, commit you git changes
+npm login (if not already)
+npm version patch   # 1.0.0 → 1.0.1
+npm version minor   # 1.0.0 → 1.1.0
+npm version major   # 1.0.0 → 2.0.0
+npm publish
+
+
+# Installation
+npm install @kuriousdesign/machine-sdk@latest
 
 Usage
 import { Machine, formatTimestamp, isMachineActive } from '@kuriousdesign/machine-sdk';

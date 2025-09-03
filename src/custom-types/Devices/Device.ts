@@ -11,6 +11,19 @@ export const DeviceConstants = {
   TIME_MS_AUTOCLEAR_DONE_BIT_TASK_OR_PROCESS: 250
 };
 
+export interface DebugLogData {
+  Msg: string;
+  TimeStamp: Date;
+  Id: number;
+}
+
+export const initialDebugLogData: DebugLogData = {
+  Msg: '',
+  TimeStamp: new Date(),
+  Id: 0
+};
+
+
 export interface DeviceLogData {
   List: DebugLogData[];
   LastIndex: number; // index of the most recent recorded entries
@@ -181,9 +194,6 @@ export enum ActionTypes {
   SCRIPT = 5,
   COUNT = 6 // Update this value to match the number of action types
 }
-
-
-
 
 export interface Device {
   is: DeviceStatus;
