@@ -1,5 +1,5 @@
 import { FaultCodeData } from "./Machine";
-import { BannerMode, Color, DeviceState, VisibilityState } from "..";
+import { BannerMode, Color, States, VisibilityState } from "..";
 
 
 export interface ComponentAnimation {
@@ -26,7 +26,7 @@ export interface ButtonBar {
 
 export interface StatusBar {
   jobName: string;
-  statusMsg: DeviceState;
+  statusMsg: States;
   status: number;
   cncTimeLeft: number[]; // get the second element in the array
   goodCnt: number;

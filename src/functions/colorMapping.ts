@@ -1,19 +1,20 @@
 import { Color } from "../enums/Colors";
-import { DeviceState, PartState } from "../enums/States";
+import { States, PartState } from "../enums/States";
 
-export function deviceStateToColorMap(state: DeviceState): Color {
-  const colorMap: { [key in DeviceState]: Color } = {
-    [DeviceState.Killed]: Color.Black,
-    [DeviceState.Inactive]: Color.Inactive,
-    [DeviceState.Resetting]: Color.Resetting,
-    [DeviceState.Idle]: Color.Idle,
-    [DeviceState.Running]: Color.Running,
-    [DeviceState.Stopping]: Color.Processing,
-    [DeviceState.Done]: Color.Done,
-    [DeviceState.Aborting]: Color.Error,
-    [DeviceState.Manual]: Color.Manual,
-    [DeviceState.Paused]: Color.Processing,
-    [DeviceState.Faulted]: Color.Error,
+export function deviceStateToColorMap(state: States): Color {
+  const colorMap: { [key in States]: Color } = {
+    [States.KILLED]: Color.Black,
+    [States.INACTIVE]: Color.Inactive,
+    [States.RESETTING]: Color.Resetting,
+    [States.IDLE]: Color.Idle,
+    [States.RUNNING]: Color.Running,
+    [States.STOPPING]: Color.Processing,
+    [States.DONE]: Color.Done,
+    [States.ABORTING]: Color.Error,
+    [States.MANUAL]: Color.Manual,
+    [States.PAUSED]: Color.Processing,
+    [States.ERROR]: Color.Error,
+    [States.UNKNOWN]: Color.Error,
   };
 
   return colorMap[state];
