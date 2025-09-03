@@ -7,7 +7,7 @@ export enum DeviceTypes {
     Bridge = 5, //used for communication
     Machine = 6,
     Robot = 7,
-}
+};
 
 export function deviceTypeToString(deviceType: DeviceTypes): string {
     switch (deviceType) {
@@ -30,4 +30,4 @@ export function deviceTypeToString(deviceType: DeviceTypes): string {
         default:
             return 'Unknown';
     }
-}
+};
