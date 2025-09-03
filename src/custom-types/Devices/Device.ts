@@ -1,12 +1,48 @@
 import { DeviceTypes } from './DeviceTypes'
 
+export const DeviceConstants = {
+  DEVICE_CHILDREN_ARRAY_LEN: 10,
+  DEVICE_FAULTCODEARRAY_LEN: 10, //this value should be greater than equal to children array len
+  MAX_NUM_PARAMS: 10, //used for tasks and processes
+  NUM_ACTION_TYPES: 6, //this includes NONE
+  NUM_LOG_ENTRIES: 50,
+  MAX_NUM_OUTBOUND_AXIS_INTERLOCKS: 10,
+  UNIT_TEST_PROCESS_ID: 1100,
+  TIME_MS_AUTOCLEAR_DONE_BIT_TASK_OR_PROCESS: 250
+};
+
+export interface DeviceLogData {
+  List: DebugLogData[];
+  LastIndex: number; // index of the most recent recorded entries
+}
+
+export const initialDeviceLogData: DeviceLogData = {
+  List: new Array(DeviceConstants.NUM_LOG_ENTRIES).fill(null),
+  LastIndex: 0
+};
+
+
 export interface DeviceRegistration {
   mnemonic: string; // short hand notation for the device, e.g. IB for Bufferwall, IBG for gantry
   id: number; // this device id
   childIdArray: number[]; // array of child device ids
   parentId: number; // this is the parent id
   deviceType: DeviceTypes; // type of the device
-}
+};
+
+export interface DeviceActionRequestData {
+  SenderId: number;
+  ActionType: number; // ActionTypes enum
+  ActionId: number; // could be cmd, task or processId
+  ParamArray: number[]; // Array of LREAL values
+};
+
+export const initialDeviceActionRequestData: DeviceActionRequestData = {
+  SenderId: 0,
+  ActionType: 0,
+  ActionId: 0,
+  ParamArray: new Array(DeviceConstants.MAX_NUM_PARAMS).fill(0)
+};
 
 export const initialDeviceRegistration: DeviceRegistration = {
   mnemonic: '',
@@ -135,6 +171,19 @@ export const initialDeviceStatus: DeviceStatus = {
   commanderId: 0,
   recordingLogs: false
 };
+
+export enum ActionTypes {
+  MISSION = 0,
+  CMD = 1,
+  TASK = 2,
+  PROCESS = 3,
+  EXEC_METHOD = 4,
+  SCRIPT = 5,
+  COUNT = 6 // Update this value to match the number of action types
+}
+
+
+
 
 export interface Device {
   is: DeviceStatus;

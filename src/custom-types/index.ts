@@ -11,3 +11,4 @@ export * from "./UserManagerFB";
 export * from "./TaskQueue";
 export * from "./RobData";
 export * from "./Devices";
+export * from "./Bridge";
