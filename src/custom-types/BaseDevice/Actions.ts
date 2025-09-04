@@ -31,7 +31,7 @@ export function actionTypeToString(actionType: ActionTypes): string {
 
 export interface DeviceActionRequestData {
   SenderId: number;
-  ActionType: number; // ActionTypes enum
+  ActionType: ActionTypes; // ActionTypes enum
   ActionId: number; // could be cmd, task or processId
   ParamArray: number[]; // Array of LREAL values
 };
