@@ -27,7 +27,12 @@
     "url": "https://github.com/kuriousDesign/machine-sdk/issues"
   },
   "exports": {
-    "./styles/*": "./src/styles/*"
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles/*": "./dist/styles/*"
   },
   "homepage": "https://github.com/kuriousDesign/machine-sdk#readme"
 }
