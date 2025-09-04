@@ -1,3 +1,3 @@
 export * from "./Axis";
-export * from "./Device";
+export * from "../BaseDevice/Device";
 export * from "./DeviceTypes";

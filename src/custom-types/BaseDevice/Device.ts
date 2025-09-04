@@ -1,15 +1,9 @@
-import { DeviceTypes } from './DeviceTypes'
+import { DeviceTypes } from '../Devices/DeviceTypes'
+import { initialProcessData, ProcessData } from './Processes';
+import { DeviceConstants } from './DeviceConstants';
+import { ApiOpcuaData, initialApiOpcuaData } from './ApiOpcua';
 
-export const DeviceConstants = {
-  DEVICE_CHILDREN_ARRAY_LEN: 10,
-  DEVICE_FAULTCODEARRAY_LEN: 10, //this value should be greater than equal to children array len
-  MAX_NUM_PARAMS: 10, //used for tasks and processes
-  NUM_ACTION_TYPES: 6, //this includes NONE
-  NUM_LOG_ENTRIES: 50,
-  MAX_NUM_OUTBOUND_AXIS_INTERLOCKS: 10,
-  UNIT_TEST_PROCESS_ID: 1100,
-  TIME_MS_AUTOCLEAR_DONE_BIT_TASK_OR_PROCESS: 250
-};
+
 
 export interface DebugLogData {
   Msg: string;
@@ -43,19 +37,7 @@ export interface DeviceRegistration {
   deviceType: DeviceTypes; // type of the device
 };
 
-export interface DeviceActionRequestData {
-  SenderId: number;
-  ActionType: number; // ActionTypes enum
-  ActionId: number; // could be cmd, task or processId
-  ParamArray: number[]; // Array of LREAL values
-};
 
-export const initialDeviceActionRequestData: DeviceActionRequestData = {
-  SenderId: 0,
-  ActionType: 0,
-  ActionId: 0,
-  ParamArray: new Array(DeviceConstants.MAX_NUM_PARAMS).fill(0)
-};
 
 export const initialDeviceRegistration: DeviceRegistration = {
   mnemonic: '',
@@ -185,15 +167,6 @@ export const initialDeviceStatus: DeviceStatus = {
   recordingLogs: false
 };
 
-export enum ActionTypes {
-  MISSION = 0,
-  CMD = 1,
-  TASK = 2,
-  PROCESS = 3,
-  EXEC_METHOD = 4,
-  SCRIPT = 5,
-  COUNT = 6 // Update this value to match the number of action types
-}
 
 export interface Device {
   is: DeviceStatus;
@@ -203,17 +176,17 @@ export interface Device {
   cfg: DeviceCfg;
   //ignore--instants: DeviceInstants;
 
-  //ignore--instantsexecMethod: ProcessData;
-  //ignore--instantstask: ProcessData;
-  //ignore--instantsprocess: ProcessData; //read-only
-  //ignore--instantsscript: ProcessData; //read-only
+  execMethod: ProcessData;
+  task: ProcessData;
+  process: ProcessData; //read-only
+  script: ProcessData; //read-only
 
   //ignore--instantsmission: ProcessData;
   //ignore--instantssettings: DeviceSettings;
   connectionStatus: boolean;
 
   //ignore--instantsrequests: Array<DeviceActionRequestData>; //this can be written to outside of the device fb;
-  //ignore--instantsapiOpcua: ApiOpcuaData;
+  apiOpcua: ApiOpcuaData;
   //ignore--instantsudp: UdpData;
 }
 
@@ -223,5 +196,10 @@ export const initialDevice: Device = {
   warnings: initialDeviceFaultData,
   registration: initialDeviceRegistration,
   cfg: initialDeviceCfg,
-  connectionStatus: false
+  connectionStatus: false,
+  execMethod: initialProcessData,
+  task: initialProcessData,
+  process: initialProcessData,
+  script: initialProcessData,
+  apiOpcua: initialApiOpcuaData
 };

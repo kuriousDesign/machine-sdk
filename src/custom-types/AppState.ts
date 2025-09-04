@@ -1,7 +1,7 @@
 import { PartState, Page } from "../enums";
 import { ButtonBar, StatusBar } from "./HMI";
 import { PartData } from "./PartData";
-import { Device } from "./Devices/Device";
+import { Device } from "./BaseDevice/Device";
 import { GlobalConstants } from "./GlobalConstants";
 import {
   RackData,
