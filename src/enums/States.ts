@@ -1,12 +1,13 @@
 export enum VisibilityState {
-  Invisible = 0,
-  Visible = 1,
-  FlashingFast = 2,
-  FlashingMed = 3,
-  FlashingSlow = 4,
-  StrobingFast = 5,
-  StrobingSlow = 6,
-  GrowingSlow = 7,
+    Invisible = 0,
+    Visible = 1,
+    FlashingFast = 2,
+    FlashingMed = 3,
+    FlashingSlow = 4,
+    StrobingFast = 5,
+    StrobingSlow = 6,
+    GrowingSlow = 7,
+    Disabled = 8
 };
 
 export enum States {
