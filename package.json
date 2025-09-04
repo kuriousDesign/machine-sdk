@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/kuriousDesign/machine-sdk/issues"
   },
+  "exports": {
+    "./styles/*": "./src/styles/*"
+  },
   "homepage": "https://github.com/kuriousDesign/machine-sdk#readme"
 }
