@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 1 \"styles/**/*\" dist/styles",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -17,6 +17,7 @@
   "author": "kuriousdesign (https://github.com/kuriousDesign)",
   "license": "MIT",
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "typescript": "^5.6.3"
   },
   "repository": {
