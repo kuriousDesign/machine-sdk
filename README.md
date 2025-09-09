@@ -1,3 +1,7 @@
+# adding new opcua tags
+don't forget that tags need to start with lowercase
+
+
 # npm install @kuriousdesign/machine-sdk
 A shared SDK for data types and helper functions used in machine-related repositories.
 
