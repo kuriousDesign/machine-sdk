@@ -6,26 +6,26 @@ import { ApiOpcuaData, initialApiOpcuaData } from './ApiOpcua';
 
 
 export interface DebugLogData {
-  Msg: string;
-  TimeStamp: Date;
-  Id: number;
+  msg: string;
+  timeStamp: Date;
+  id: number;
 }
 
 export const initialDebugLogData: DebugLogData = {
-  Msg: '',
-  TimeStamp: new Date(),
-  Id: 0
+  msg: '',
+  timeStamp: new Date(),
+  id: 0
 };
 
 
 export interface DeviceLogData {
-  List: DebugLogData[];
-  LastIndex: number; // index of the most recent recorded entries
+  list: DebugLogData[];
+  lastIndex: number; // index of the most recent recorded entries
 }
 
 export const initialDeviceLogData: DeviceLogData = {
-  List: new Array(DeviceConstants.NUM_LOG_ENTRIES).fill(null),
-  LastIndex: 0
+  list: new Array(DeviceConstants.NUM_LOG_ENTRIES).fill(null),
+  lastIndex: 0
 };
 
 
@@ -63,39 +63,39 @@ export const initialDeviceCfg: DeviceCfg = {
 };
 
 export interface FaultData {
-  DeviceId: number;
-  Code: number; // this is deprecated
-  Msg: string;
-  AutoReset: boolean; // if this is true, the code will be reset by the fault monitor
-  ResetFlag: boolean; // used by the fault monitor to know whether to clear an fault or not
-  LogFlag: boolean; // when true, this fault hasn't been logged yet
-  TimeStamp: Date;
-  StepNum: number; // of this device
-  ParentStepNum: number;
+  deviceId: number;
+  code: number; // this is deprecated
+  msg: string;
+  autoReset: boolean; // if this is true, the code will be reset by the fault monitor
+  resetFlag: boolean; // used by the fault monitor to know whether to clear an fault or not
+  logFlag: boolean; // when true, this fault hasn't been logged yet
+  timeStamp: Date;
+  stepNum: number; // of this device
+  parentStepNum: number;
 }
 
 export const initialFaultData: FaultData = {
-  DeviceId: 0,
-  Code: 0,
-  Msg: '',
-  AutoReset: false,
-  ResetFlag: false,
-  LogFlag: false,
-  TimeStamp: new Date(),
-  StepNum: 0,
-  ParentStepNum: 0
+  deviceId: 0,
+  code: 0,
+  msg: '',
+  autoReset: false,
+  resetFlag: false,
+  logFlag: false,
+  timeStamp: new Date(),
+  stepNum: 0,
+  parentStepNum: 0
 };
 
 export interface DeviceFaultData {
-  List: FaultData[]; // Array of fault data
-  Present: boolean; // status
-  ChildrenPresent: boolean; // status that children have errors
+  list: FaultData[]; // Array of fault data
+  present: boolean; // status
+  childrenPresent: boolean; // status that children have errors
 }
 
 export const initialDeviceFaultData: DeviceFaultData = {
-  List: [],
-  Present: false,
-  ChildrenPresent: false
+  list: [],
+  present: false,
+  childrenPresent: false
 };
 
 export interface DeviceStatus {
