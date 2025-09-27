@@ -12,3 +12,34 @@ export enum DeviceCmds {
     START_RECORDING_LOGS = 10, // writes to Machine.RecordedLogs
     STOP_RECORDING_LOGS = 11
 }
+
+export function deviceCmdToString(cmd: DeviceCmds): string {
+    switch (cmd) {
+        case DeviceCmds.NONE:
+            return "None";
+        case DeviceCmds.RESET:
+            return "Reset";
+        case DeviceCmds.STOP:
+            return "Stop";
+        case DeviceCmds.CLEAR:
+            return "Clear";
+        case DeviceCmds.KILL:
+            return "Kill";
+        case DeviceCmds.PAUSE:
+            return "Pause";
+        case DeviceCmds.UNPAUSE:
+            return "Unpause";
+        case DeviceCmds.START:
+            return "Start";
+        case DeviceCmds.TAKE_CONTROL:
+            return "Take Control";
+        case DeviceCmds.RELEASE_CONTROL:
+            return "Release Control";
+        case DeviceCmds.START_RECORDING_LOGS:
+            return "Start Recording Logs";
+        case DeviceCmds.STOP_RECORDING_LOGS:
+            return "Stop Recording Logs";
+        default:
+            return "Unknown Command";
+    }
+}
