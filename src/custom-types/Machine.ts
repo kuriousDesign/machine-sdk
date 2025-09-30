@@ -21,3 +21,14 @@ export interface SystemFaultData {
 //   errors: SystemFaultData;
 //   warnings: SystemFaultData;
 // }
+
+export interface Machine {
+    estopCircuit_OK: boolean;
+    estopCircuitDelayed_OK: boolean;
+    fenceCircuit_OK: boolean;
+    guardDoors_LOCKED: boolean;
+    networkHealth_OK: boolean;
+    ethercatMaster_OK: boolean;
+    ethercatSlaves_OK: boolean;
+    supplyAir_OK: boolean;
+}
