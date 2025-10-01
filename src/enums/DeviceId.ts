@@ -7,7 +7,7 @@ export enum DeviceId {
   DIAG = 5,
   RC = 6,
   
-  LROB = 10,
+  ROB = 10,
   ABB = 11,
   EOAT = 12,
   VIS = 13,
@@ -48,7 +48,7 @@ export enum DeviceId {
   IBZ1 = 48,
   IBZ2 = 49,
   WASH = 50,
-  ROB = 51,
+  //ROB = 51,
   DBRR = 52,
   CNC = 53,
   RACK = 54,
