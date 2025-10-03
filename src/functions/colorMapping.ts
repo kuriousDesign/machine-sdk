@@ -1,5 +1,5 @@
 import { Color } from "../enums/Colors";
-import { States, PartState } from "../enums/States";
+import { States, PartStateDeprecated } from "../enums/States";
 
 export function deviceStateToColorMap(state: States): Color {
   const colorMap: { [key in States]: Color } = {
@@ -20,23 +20,23 @@ export function deviceStateToColorMap(state: States): Color {
   return colorMap[state];
 }
 
-export function partStateToColorMap(state: PartState): Color {
-  const colorMap: { [key in PartState]: Color } = {
-    [PartState.Empty]: Color.Empty,
-    [PartState.Raw]: Color.Raw,
-    [PartState.DeburrBottomStarted]: Color.Processing,
-    [PartState.DeburrBottomFinished]: Color.DeburrBottomFinished,
-    [PartState.DeburrTopStarted]: Color.Processing,
-    [PartState.Deburred]: Color.Deburred,
-    [PartState.MachiningStarted]: Color.Processing,
-    [PartState.Machined]: Color.Machined,
-    [PartState.WashStarted]: Color.Processing,
-    [PartState.Washed]: Color.Processing,
-    [PartState.DryStarted]: Color.Processing,
-    [PartState.Dryed]: Color.Dryed,
-    [PartState.Finished]: Color.Finished,
-    [PartState.Scrapped]: Color.Scrapped,
-    [PartState.Error]: Color.Error,
+export function partStateToColorMap(state: PartStateDeprecated): Color {
+  const colorMap: { [key in PartStateDeprecated]: Color } = {
+    [PartStateDeprecated.Empty]: Color.Empty,
+    [PartStateDeprecated.Raw]: Color.Raw,
+    [PartStateDeprecated.DeburrBottomStarted]: Color.Processing,
+    [PartStateDeprecated.DeburrBottomFinished]: Color.DeburrBottomFinished,
+    [PartStateDeprecated.DeburrTopStarted]: Color.Processing,
+    [PartStateDeprecated.Deburred]: Color.Deburred,
+    [PartStateDeprecated.MachiningStarted]: Color.Processing,
+    [PartStateDeprecated.Machined]: Color.Machined,
+    [PartStateDeprecated.WashStarted]: Color.Processing,
+    [PartStateDeprecated.Washed]: Color.Processing,
+    [PartStateDeprecated.DryStarted]: Color.Processing,
+    [PartStateDeprecated.Dryed]: Color.Dryed,
+    [PartStateDeprecated.Finished]: Color.Finished,
+    [PartStateDeprecated.Scrapped]: Color.Scrapped,
+    [PartStateDeprecated.Error]: Color.Error,
   };
 
   return colorMap[state];

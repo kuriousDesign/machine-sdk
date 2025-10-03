@@ -137,7 +137,7 @@ export function getStateFromStep(step:number): States {
     return state;
 }
 
-export enum PartState {
+export enum PartStateDeprecated {
   Empty = 0, //no part present
   Raw = 10,
   DeburrBottomStarted = 11,

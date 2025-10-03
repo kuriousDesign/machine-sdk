@@ -10,7 +10,8 @@ export const MachineTags = {
     registeredDevices: 'RegisteredDevices',
     axisStsArray: 'AxisStsArray',
     HeartbeatPLC: 'HeartbeatPLC',
-    HeartbeatHMI: 'HeartbeatHMI'
+    HeartbeatHMI: 'HeartbeatHMI',
+    parts: 'Parts',
 }
 
 export const DeviceTags = {

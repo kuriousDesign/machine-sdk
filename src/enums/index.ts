@@ -5,6 +5,6 @@ export * from "./ExtrusionType";
 
 export * from "./DeviceId";
 export * from "./TaskId";
-export * from "./Priorities";
+
 export * from "./Pages";
 export * from "./RobPositions";

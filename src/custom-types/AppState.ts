@@ -1,6 +1,6 @@
-import { PartState, Page } from "../enums";
+import { PartStateDeprecated, Page } from "../enums";
 import { ButtonBar, StatusBar } from "./HMI";
-import { PartData } from "./PartData";
+import { PartDataDeprecated } from "./Part";
 import { Device } from "./BaseDevice/Device";
 import { GlobalConstants } from "./GlobalConstants";
 import {
@@ -51,7 +51,7 @@ export interface AppState {
   [NodeId.CNC]: Device;
   [NodeId.DBRR]: Device;
   [NodeId.WASH]: Device;
-  [NodeId.PartData]: PartData;
+  [NodeId.PartData]: PartDataDeprecated;
   [NodeId.TaskQueue]: TaskQueue;
   [NodeId.GlobalConstants]: GlobalConstants;
   [NodeId.MachineUser]: UserData;
