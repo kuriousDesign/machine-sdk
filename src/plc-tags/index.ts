@@ -12,6 +12,7 @@ export const MachineTags = {
     HeartbeatPLC: 'HeartbeatPLC',
     HeartbeatHMI: 'HeartbeatHMI',
     parts: 'Parts',
+    taskQueue: 'TaskQueue',
 }
 
 export const DeviceTags = {

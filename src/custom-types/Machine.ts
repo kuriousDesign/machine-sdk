@@ -1,5 +1,5 @@
 import { ComponentAnimation, DeviceConstants, DeviceRegistration, GCs, initialDeviceRegistration, initialTaskQueue, TaskQueue } from ".";
-import { PartData } from "./Part";
+import { initialPartDataStatus, PartData, PartDataStatus } from "./Part";
 
 
 export interface UserData {
@@ -77,7 +77,7 @@ export interface Machine {
     ethercatSlaves_OK: boolean;
     supplyAir_OK: boolean;
     cfg: MachineCfg;
-    parts: PartData[];
+    pdmSts: PartDataStatus;
     errors: SystemFaultData;
     warnings: SystemFaultData;
     taskQueue: TaskQueue;
@@ -94,7 +94,7 @@ export const initialMachine: Machine = ({
   ethercatSlaves_OK: false,
   supplyAir_OK: false,
   cfg: { ...initialMachineCfg },
-  parts: [],
+  pdmSts: initialPartDataStatus,
   errors: { ...initialSystemFaultData },
   warnings: { ...initialSystemFaultData },
   taskQueue: { ...initialTaskQueue },
