@@ -82,6 +82,8 @@ export interface Machine {
     warnings: SystemFaultData;
     taskQueue: TaskQueue;
     registeredDevices: DeviceRegistration[];
+    heartbeatPlc: number;
+    heartbeatHmi: number;
 }
 
 export const initialMachine: Machine = ({
@@ -99,5 +101,6 @@ export const initialMachine: Machine = ({
   warnings: { ...initialSystemFaultData },
   taskQueue: { ...initialTaskQueue },
   registeredDevices: [],
-
+  heartbeatPlc: 0,
+  heartbeatHmi: 0,
 });
