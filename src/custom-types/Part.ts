@@ -26,10 +26,76 @@ import { GCs } from "./GlobalConstants";
 // END_STRUCT
 // END_TYPE
 
+// {attribute 'qualified_only'}
+// {attribute 'strict'}
+// //Just subtract 5 from a discrete part state that, this corresponds to processing
+// TYPE PartStates :
+// (
+// 	Empty:=0,//no part present
+// 	//BadSensorEmpty:=1, //used if sensors give false positive
+	
+// 	UnvalidatedRaw:=10, //used if registered by sensor, but not approved by operator
 
+// 	Raw:=20,
+// 	//BadSensorRaw:=21, //used if loaded by sensor didn't work
+	
+// 	StartedPreWeighing:=29,
+// 	PreWeighed:=30,
+	
+// 	StartedApplying:=31,
+// 	Applied:=40,
+	
+// 	StartedPhotographing:=61,
+// 	Photographed:=70,
+	
+// 	StartedPostWeighing:=71,
+// 	PostWeighed:=80,
+	
+// 	Failed:=911,
+// 	Passed:=1000 //ProessingDone, back in fixture and waiting to be unloaded
+
+	
+// );
+// END_TYPE
+
+export enum PartStates {
+    Empty = 0,//no part present
+    //BadSensorEmpty = 1, //used if sensors give false positive
+    UnvalidatedRaw = 10, //used if registered by sensor, but not approved by operator
+    Raw = 20,
+    //BadSensorRaw = 21, //used if loaded by sensor didn't work
+    StartedPreWeighing = 29,
+    PreWeighed = 30,
+    StartedApplying = 31,
+    Applied = 40,
+    StartedPhotographing = 61,
+    Photographed = 70,
+    StartedPostWeighing = 71,
+    PostWeighed = 80,
+    Failed = 911,
+    Passed = 1000 //ProessingDone, back in fixture and waiting to be unloaded
+};
+
+export function partStateToString(state: PartStates): string {
+    switch (state) {
+        case PartStates.Empty: return "Empty";
+        case PartStates.UnvalidatedRaw: return "Unvalidated Raw";
+        case PartStates.Raw: return "Raw";
+        case PartStates.StartedPreWeighing: return "Started Pre-Weighing";
+        case PartStates.PreWeighed: return "Pre-Weighed";
+        case PartStates.StartedApplying: return "Started Applying";
+        case PartStates.Applied: return "Applied";
+        case PartStates.StartedPhotographing: return "Started Photographing";
+        case PartStates.Photographed: return "Photographed";
+        case PartStates.StartedPostWeighing: return "Started Post-Weighing";
+        case PartStates.PostWeighed: return "Post-Weighed";
+        case PartStates.Failed: return "Failed";
+        case PartStates.Passed: return "Passed";
+    }
+}
 
 export interface PartData {
-    processSts: number; // PartStates enum
+    processSts: PartStates; // PartStates enum
     validation: PartValidationData;
     loadedBadSensor: boolean; // marks if loaded into system with bad part present sensor
     fixtureLocationWhenLoaded: number; // LocationIds enum, where this part was loaced
@@ -51,7 +117,7 @@ export const initialPartValidationData: PartValidationData = {
     linerWeightKg: -1,
 };
 export const initialPartData: PartData = {
-    processSts: -1,
+    processSts: PartStates.Empty,
     validation: { ...initialPartValidationData },
     loadedBadSensor: false,
     fixtureLocationWhenLoaded: -1,
