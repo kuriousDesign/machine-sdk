@@ -98,6 +98,6 @@ export const initialMachine: Machine = ({
   errors: { ...initialSystemFaultData },
   warnings: { ...initialSystemFaultData },
   taskQueue: { ...initialTaskQueue },
-  registeredDevices: Array(GCs.NUM_DEVICES).fill(null).map(() => ({ ...initialDeviceRegistration }))
+  registeredDevices: [],
 
 });
