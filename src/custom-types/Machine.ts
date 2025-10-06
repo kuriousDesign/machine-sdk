@@ -1,5 +1,6 @@
-import { ComponentAnimation, DeviceConstants, initialTaskQueue, TaskQueue } from ".";
+import { ComponentAnimation, DeviceConstants, DeviceRegistration, GCs, initialDeviceRegistration, initialTaskQueue, TaskQueue } from ".";
 import { PartData } from "./Part";
+
 
 export interface UserData {
   activeUser: number;
@@ -80,20 +81,23 @@ export interface Machine {
     errors: SystemFaultData;
     warnings: SystemFaultData;
     taskQueue: TaskQueue;
+    registeredDevices: DeviceRegistration[];
 }
 
-export const initialMachine: Machine = {  
-    estopCircuit_OK: false,
-    estopCircuitDelayed_OK: false,
-    fenceCircuit_OK: false,
-    guardDoors_LOCKED: false,
-    networkHealth_OK: false,
-    ethercatMaster_OK: false,
-    ethercatSlaves_OK: false,
-    supplyAir_OK: false,
-    cfg: initialMachineCfg,
-    parts: [],
-    errors: initialSystemFaultData,
-    warnings: initialSystemFaultData,
-    taskQueue: initialTaskQueue,
-};
+export const initialMachine: Machine = ({
+  estopCircuit_OK: false,
+  estopCircuitDelayed_OK: false,
+  fenceCircuit_OK: false,
+  guardDoors_LOCKED: false,
+  networkHealth_OK: false,
+  ethercatMaster_OK: false,
+  ethercatSlaves_OK: false,
+  supplyAir_OK: false,
+  cfg: { ...initialMachineCfg },
+  parts: [],
+  errors: { ...initialSystemFaultData },
+  warnings: { ...initialSystemFaultData },
+  taskQueue: { ...initialTaskQueue },
+  registeredDevices: Array(GCs.NUM_DEVICES).fill(null).map(() => ({ ...initialDeviceRegistration }))
+
+});
