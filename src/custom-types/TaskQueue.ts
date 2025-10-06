@@ -1,3 +1,5 @@
+import { DeviceConstants } from "./BaseDevice";
+
 export enum Priorities {
     NONE = 0, // do not remove or change this
     LOAD_PARTS = 2,
@@ -10,12 +12,7 @@ export enum Priorities {
     UNLOAD_PARTS = 70
 }
 
-export interface TaskQueue {
-  topPriority: Priorities;
-  taskList: TaskData[];
-  taskCnt: number;
-  activeTaskIndex: number;
-}
+
 
 export interface TaskData {
   targetId: number;
@@ -23,3 +20,24 @@ export interface TaskData {
   paramArray: number[]; // ARRAY[0..DeviceConstants.MAX_NUM_PARAMS-1] OF LREAL;
   state: number; // DeviceStates: 0 (NONE), IDLE, RUNNING, PAUSED, ERROR, DONE
 }
+
+export const initialTaskData: TaskData = {
+  targetId: 0,
+  taskId: 0,
+  paramArray: Array(DeviceConstants.MAX_NUM_PARAMS).fill(0),
+  state: 0
+};  
+
+
+export interface TaskQueue {
+  topPriority: Priorities;
+  taskList: TaskData[];
+  taskCnt: number;
+  activeTaskIndex: number;
+}
+export const initialTaskQueue: TaskQueue = {
+  topPriority: Priorities.NONE,
+  taskList: Array(DeviceConstants.MAX_NUM_PARAMS).fill(null).map(() => ({ ...initialTaskData })),
+  taskCnt: 0,
+  activeTaskIndex: -1
+};

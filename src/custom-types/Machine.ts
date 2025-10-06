@@ -1,4 +1,4 @@
-import { ComponentAnimation } from ".";
+import { ComponentAnimation, DeviceConstants, initialTaskQueue, TaskQueue } from ".";
 import { PartData } from "./Part";
 
 export interface UserData {
@@ -12,10 +12,21 @@ export interface FaultCodeData {
   code: number;
 }
 
+export const initialFaultCodeData: FaultCodeData = {
+  deviceId: 0,
+  code: 0,
+};
+
 export interface SystemFaultData {
   list: FaultCodeData[];
   present: boolean;
 }
+
+export const initialSystemFaultData: SystemFaultData = {
+  list: Array(DeviceConstants.DEVICE_FAULTCODEARRAY_LEN).fill(null).map(() => ({ ...initialFaultCodeData })),
+  present: false,
+};
+
 
 
 // TYPE MachineCfg :
@@ -45,6 +56,16 @@ export interface MachineCfg {
   ethernetAdapterList: number[];
 }
 
+export const initialMachineCfg: MachineCfg = {
+  firmwareVersion: "",
+  cellType: "",
+  softwareMode: "",
+  allowAnonymousControl: false,
+  deviceIsBypassed: [],
+  apiOpcuaDeviceId: -1,
+  ethernetAdapterList: [],
+};
+
 export interface Machine {
     estopCircuit_OK: boolean;
     estopCircuitDelayed_OK: boolean;
@@ -58,5 +79,21 @@ export interface Machine {
     parts: PartData[];
     errors: SystemFaultData;
     warnings: SystemFaultData;
-    //taskList: MachineTask[];
+    taskQueue: TaskQueue;
 }
+
+export const initialMachine: Machine = {  
+    estopCircuit_OK: false,
+    estopCircuitDelayed_OK: false,
+    fenceCircuit_OK: false,
+    guardDoors_LOCKED: false,
+    networkHealth_OK: false,
+    ethercatMaster_OK: false,
+    ethercatSlaves_OK: false,
+    supplyAir_OK: false,
+    cfg: initialMachineCfg,
+    parts: [],
+    errors: initialSystemFaultData,
+    warnings: initialSystemFaultData,
+    taskQueue: initialTaskQueue,
+};
