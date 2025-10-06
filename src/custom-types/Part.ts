@@ -58,6 +58,38 @@ import { GCs } from "./GlobalConstants";
 // );
 // END_TYPE
 
+
+// {attribute 'qualified_only'}
+// //{attribute 'strict'}
+// TYPE PartLocationIds :
+// (
+// 	None:=0,
+// 	RobotGripper:=1,
+// 	LeftFixture_P1 :=2,
+// 	RightFixture_P1:=LeftFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE,
+// 	Lost:=RightFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE
+// );
+// END_TYPE
+
+export enum PartLocationIds {
+    None = 0,
+    RobotGripper = 1,
+    LeftFixture_P1 = 2,
+    RightFixture_P1 = LeftFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE,
+    Lost = RightFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE
+};
+
+export function partLocationIdToString(locationId: PartLocationIds): string {
+    switch (locationId) {
+        case PartLocationIds.None: return "None";
+        case PartLocationIds.RobotGripper: return "Robot Gripper";
+        case PartLocationIds.LeftFixture_P1: return "Left Fixture P1";
+        case PartLocationIds.RightFixture_P1: return "Right Fixture P1";
+        case PartLocationIds.Lost: return "Lost";
+        default: return "Unknown";
+    }
+}
+
 export enum PartStates {
     Empty = 0,//no part present
     //BadSensorEmpty = 1, //used if sensors give false positive
