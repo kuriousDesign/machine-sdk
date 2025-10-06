@@ -12,3 +12,4 @@ export * from "./TaskQueue";
 export * from "./RobData";
 export * from "./Devices";
 export * from "./Bridge";
+export * from "./Part";
