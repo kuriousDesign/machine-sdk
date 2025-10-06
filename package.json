@@ -1,6 +1,6 @@
 {
   "name": "@kuriousdesign/machine-sdk",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "description": "Shared data types and helpers for machine-related repositories",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
