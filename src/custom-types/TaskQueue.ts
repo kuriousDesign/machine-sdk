@@ -12,9 +12,33 @@ export enum Priorities {
     UNLOAD_PARTS = 70
 }
 
-
+export function priorityToString(priority: Priorities): string {
+    switch (priority) {
+        case Priorities.NONE:
+            return "None";
+        case Priorities.LOAD_PARTS:
+            return "Load Parts";
+        case Priorities.START_UTILITIES:
+            return "Start Utilities";
+        case Priorities.PRE_WEIGH_TUBES:
+            return "Pre Weigh Tubes";
+        case Priorities.APPLY_LINER:
+            return "Apply Liner";
+        case Priorities.PHOTOGRAPH_TUBES:
+            return "Photograph Tubes";
+        case Priorities.POST_WEIGH_TUBES:
+            return "Post Weigh Tubes";
+        case Priorities.STOP_UTILITIES:
+            return "Stop Utilities";
+        case Priorities.UNLOAD_PARTS:
+            return "Unload Parts";
+        default:
+            return "Unknown";
+    }
+}
 
 export interface TaskData {
+  description:string;
   targetId: number;
   taskId: number; // specific to the targetId
   paramArray: number[]; // ARRAY[0..DeviceConstants.MAX_NUM_PARAMS-1] OF LREAL;
@@ -22,6 +46,7 @@ export interface TaskData {
 }
 
 export const initialTaskData: TaskData = {
+  description: "",
   targetId: 0,
   taskId: 0,
   paramArray: Array(DeviceConstants.MAX_NUM_PARAMS).fill(0),
