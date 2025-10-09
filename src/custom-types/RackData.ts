@@ -1,4 +1,5 @@
-import { RobPositionData } from "..";
+import { RobPositionData } from "./Devices/Robot";
+
 
 export interface ShelfPartPositionData {
   index: number;

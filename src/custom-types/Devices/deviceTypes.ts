@@ -1,13 +1,35 @@
+// {attribute 'qualified_only'}
+// {attribute 'strict'}
+// TYPE DeviceTypes :
+// (
+// 	Base := 0, 
+// 	Axis := 1,
+// 	BoschAxis:=2,
+// 	DualAxis:=3,
+// 	Gantry:=4,
+// 	System:=5,
+// 	Bridge:=6,
+// 	Conductor:=7,
+// 	Rob:=8,
+// 	Eoat:=9,
+// 	Vision:=10
+// );
+// END_TYPE
+
+
+
 export enum DeviceTypes {
     Base = 0,
     Axis = 1,
-    BoschAxis = 2, //need to deprecate this soon
+    BoschAxis = 2,
     DualAxis = 3,
     Gantry = 4,
-    Bridge = 5, //used for communication
-    Machine = 6,
-    Robot = 7,
-};
+    Bridge = 6,
+    Machine = 7,
+    Robot = 8,
+    Vision = 10,
+    TwoPos = 11
+}
 
 export function deviceTypeToString(deviceType: DeviceTypes): string {
     switch (deviceType) {
@@ -27,6 +49,10 @@ export function deviceTypeToString(deviceType: DeviceTypes): string {
             return 'Machine';
         case DeviceTypes.Robot:
             return 'Robot';
+        case DeviceTypes.Vision:
+            return 'Vision';
+        case DeviceTypes.TwoPos:
+            return 'Two Position';
         default:
             return 'Unknown';
     }

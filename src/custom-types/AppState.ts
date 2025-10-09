@@ -8,13 +8,12 @@ import {
   RackHmiPbs,
   RecipeData,
   RecipeManagerPbs,
-  RobPositionData,
   SystemFaultData,
   TaskQueue,
   UserData,
   UserManagerFB,
-  RobData,
 } from ".";
+import { RobData } from "./Devices/Robot";
 
 export enum NodeId {
   // new node ids

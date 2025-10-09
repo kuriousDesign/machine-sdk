@@ -7,4 +7,3 @@ export * from "./DeviceId";
 export * from "./TaskId";
 
 export * from "./Pages";
-export * from "./RobPositions";
