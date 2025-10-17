@@ -86,7 +86,7 @@ export interface Machine {
     heartbeatPlc: number;
     heartbeatHmi: number;
     machineLog: LogRecordData;
-    deviceLogs: DeviceLogData[];  //ARRAY[0..(GCs.NUM_DEVICES-1)] OF DeviceLogData;
+    //deviceLogs: DeviceLogData[];  //ARRAY[0..(GCs.NUM_DEVICES-1)] OF DeviceLogData;
 }
 
 // TYPE LogRecordData :
@@ -124,5 +124,5 @@ export const initialMachine: Machine = ({
   heartbeatPlc: 0,
   heartbeatHmi: 0,
   machineLog: { ...initialLogRecordData },
-  deviceLogs: Array(GCs.NUM_DEVICES).fill(null).map(() => ({ ...initialDeviceLogData })),
+  //deviceLogs: Array(GCs.NUM_DEVICES).fill(null).map(() => ({ ...initialDeviceLogData })),
 });
