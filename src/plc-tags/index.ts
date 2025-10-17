@@ -15,7 +15,7 @@ export const MachineTags = {
     taskQueue: 'TaskQueue',
     //deviceLogs: 'DeviceLogs',
     machineLog: 'MachineLog',
-    deviceLogs: 'Machine.DeviceLogs',
+    deviceLogs: 'DeviceLogs',
 }
 
 export const DeviceTags = {
