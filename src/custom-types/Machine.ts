@@ -1,4 +1,4 @@
-import { ComponentAnimation, DeviceConstants, DeviceRegistration, GCs, initialDeviceRegistration, initialTaskQueue, TaskQueue } from ".";
+import { ComponentAnimation, DebugLogData, DeviceConstants, DeviceLogData, DeviceRegistration, GCs, initialDebugLogData, initialDeviceLogData, initialDeviceRegistration, initialTaskQueue, TaskQueue } from ".";
 import { initialPartDataStatus, PartData, PartDataStatus } from "./Part";
 
 
@@ -84,7 +84,26 @@ export interface Machine {
     registeredDevices: DeviceRegistration[];
     heartbeatPlc: number;
     heartbeatHmi: number;
+    machineLog: LogRecordData;
+    deviceLogs: DeviceLogData[];  //ARRAY[0..(GCs.NUM_DEVICES-1)] OF DeviceLogData;
 }
+
+// TYPE LogRecordData :
+// STRUCT
+// 	List: ARRAY[0..DiagConstants.NUM_ENTRIES_RECORDED_LOG-1] OF DebugLogData;
+// 	LastIndex:USINT; //index of the most recent recorde entries
+// END_STRUCT
+// END_TYPE
+
+export interface LogRecordData {
+  list: DebugLogData[];
+  lastIndex: number; // index of the most recent recorded entries
+}
+
+export const initialLogRecordData: LogRecordData = {
+  list: Array(GCs.NUM_ENTRIES_MACHINE_LOG).fill(null).map(() => ({ ...initialDebugLogData })),
+  lastIndex: 0,
+};
 
 export const initialMachine: Machine = ({
   estopCircuit_OK: false,
@@ -103,4 +122,6 @@ export const initialMachine: Machine = ({
   registeredDevices: [],
   heartbeatPlc: 0,
   heartbeatHmi: 0,
+  machineLog: { ...initialLogRecordData },
+  deviceLogs: Array(GCs.NUM_DEVICES).fill(null).map(() => ({ ...initialDeviceLogData })),
 });

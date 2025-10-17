@@ -102,10 +102,10 @@ export interface DeviceStatus {
   state: number; // enum for States enum, same as the boolean states in the data structure
   stepNum: number;
   stepDescription: string;
-  
+
   colorCode: number; // color to indicate the current status for HMI purposes
   statusMsg: string; // status string
-  
+
   error: boolean; // state, device or child has an error
   killed: boolean; // device is de-energized
   inactive: boolean; // waiting to be reset
@@ -124,15 +124,15 @@ export interface DeviceStatus {
   ipr: boolean; // IdleOrPausedOrRunning
   kei: boolean; // KilledErrorOrInactive
   runningOrStopping: boolean;
-  
+
   // Children Status
   allChildrenIdle: boolean;
   allChildrenKilled: boolean;
   allChildrenInactive: boolean;
   allChildrenIdleOrError: boolean;
-  
+
   commanderId: number; // used for external control
-  
+
   recordingLogs: boolean;
 }
 
@@ -203,3 +203,16 @@ export const initialDevice: Device = {
   script: initialProcessData,
   apiOpcua: initialApiOpcuaData
 };
+
+
+// TYPE DeviceLogData :
+// STRUCT
+// 	List: ARRAY[0..DeviceConstants.NUM_LOG_ENTRIES-1] OF DebugLogData;
+// 	LastIndex:INT; //index of the most recent recorde entries
+// END_STRUCT
+// END_TYPE
+
+export interface DeviceLogData {
+  list: DebugLogData[];
+  lastIndex: number; // index of the most recent recorded entries
+}

@@ -92,4 +92,5 @@ export const GCs = {
   //TASKQUEUE_LEN:INT:=100;
   // HW SIDE
   MAX_NUM_HW_CARDS: 16,
+  NUM_ENTRIES_MACHINE_LOG: 100,
 };

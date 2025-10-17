@@ -13,6 +13,8 @@ export const MachineTags = {
     HeartbeatHMI: 'HeartbeatHMI',
     parts: 'Parts',
     taskQueue: 'TaskQueue',
+    //deviceLogs: 'DeviceLogs',
+    machineLog: 'MachineLog',
 }
 
 export const DeviceTags = {
@@ -30,6 +32,8 @@ export const DeviceTags = {
     ApiOpcuaHmiReq: 'ApiOpcua/HmiReq',
     ApiOpcuaHmiResp: 'ApiOpcua/HmiResp',
 }
+
+export const DeviceLogTags = 'Machine.DeviceLogs';
 
 export * from "./opcua";
 export * from "./mqtt";
