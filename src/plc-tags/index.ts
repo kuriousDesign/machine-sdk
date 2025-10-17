@@ -15,6 +15,7 @@ export const MachineTags = {
     taskQueue: 'TaskQueue',
     //deviceLogs: 'DeviceLogs',
     machineLog: 'MachineLog',
+    deviceLogs: 'Machine.DeviceLogs',
 }
 
 export const DeviceTags = {
@@ -32,8 +33,6 @@ export const DeviceTags = {
     ApiOpcuaHmiReq: 'ApiOpcua/HmiReq',
     ApiOpcuaHmiResp: 'ApiOpcua/HmiResp',
 }
-
-export const DeviceLogTags = 'Machine.DeviceLogs';
 
 export * from "./opcua";
 export * from "./mqtt";
