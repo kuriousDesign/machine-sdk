@@ -1,5 +1,6 @@
-import { ComponentAnimation, DebugLogData, DeviceConstants, DeviceLogData, DeviceRegistration, GCs, initialDebugLogData, initialDeviceLogData, initialDeviceRegistration, initialTaskQueue, TaskQueue } from ".";
+import { ComponentAnimation, DebugLogData, DeviceConstants, DeviceLogData, DeviceRegistration, initialDebugLogData, initialDeviceLogData, initialDeviceRegistration, initialTaskQueue, TaskQueue } from ".";
 import { initialPartDataStatus, PartData, PartDataStatus } from "./Part";
+import { GCs } from "./GlobalConstants";
 
 
 export interface UserData {
