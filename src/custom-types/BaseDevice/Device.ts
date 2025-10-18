@@ -187,6 +187,7 @@ export interface Device {
 
   //ignore--instantsrequests: Array<DeviceActionRequestData>; //this can be written to outside of the device fb;
   apiOpcua: ApiOpcuaData;
+  log: DeviceLogData;
   //ignore--instantsudp: UdpData;
 }
 
@@ -201,7 +202,8 @@ export const initialDevice: Device = {
   task: initialProcessData,
   process: initialProcessData,
   script: initialProcessData,
-  apiOpcua: initialApiOpcuaData
+  apiOpcua: initialApiOpcuaData,
+  log: initialDeviceLogData
 };
 
 
