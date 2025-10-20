@@ -32,19 +32,25 @@ export const initialApiOpcuaData: ApiOpcuaData = {
   resp: {} as ApiOpcuaReqData
 };
 
-export enum ApiReqRespStates {
-  INACTIVE = 0,
-  REQUEST_READY = 1,
-  REJECTED_INVALID_CHECKSUM = 2,
-  REJECTED_ACTION_NOT_ACCEPTED = 3,
-  REJECTED_INVALID_SENDERID = 4,
-  ACCEPTED = 1000
+
+export declare enum ApiReqRespStates {
+    INACTIVE = 0,
+    WRITING = 10,
+    REQUEST_READY = 20,
+    REJECTED_INVALID_CHECKSUM = 30,
+    REJECTED_ACTION_NOT_ACCEPTED = 40,
+    REJECTED_INVALID_SENDERID = 50,
+    ACCEPTED = 1000,
+    // ERROR = 911,
+    // DONE = 1000
 }
 
 export function apiReqRespStateToString(state: ApiReqRespStates): string {
   switch (state) {
     case ApiReqRespStates.INACTIVE:
       return "INACTIVE";
+    case ApiReqRespStates.WRITING:
+      return "WRITING";
     case ApiReqRespStates.REQUEST_READY:
       return "REQUEST_READY";
     case ApiReqRespStates.REJECTED_INVALID_CHECKSUM:
