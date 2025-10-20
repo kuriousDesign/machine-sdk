@@ -37,7 +37,7 @@ export const initialApiOpcuaData: ApiOpcuaData = {
 };
 
 
-export declare enum ApiReqRespStates {
+export enum ApiReqRespStates {
     INACTIVE = 0,
     WRITING = 10,
     REQUEST_READY = 20,
