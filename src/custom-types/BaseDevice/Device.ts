@@ -206,7 +206,6 @@ export const initialDevice: Device = {
   log: initialDeviceLogData
 };
 
-
 // TYPE DeviceLogData :
 // STRUCT
 // 	List: ARRAY[0..DeviceConstants.NUM_LOG_ENTRIES-1] OF DebugLogData;

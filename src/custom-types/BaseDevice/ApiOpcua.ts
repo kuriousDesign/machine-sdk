@@ -21,6 +21,8 @@ export interface ApiOpcuaData {
   orchResp: ApiOpcuaReqData; // written by PLC
   req: ApiOpcuaReqData; // written by mtac, read by plc
   resp: ApiOpcuaReqData; // written by plc, read by testand
+  internalReq: ApiOpcuaReqData; // used internally by mtac
+  internalResp: ApiOpcuaReqData; // used internally by mtac
 }
 
 export const initialApiOpcuaData: ApiOpcuaData = {
@@ -29,7 +31,9 @@ export const initialApiOpcuaData: ApiOpcuaData = {
   orchReq: {} as ApiOpcuaReqData,
   orchResp: {} as ApiOpcuaReqData,
   req: {} as ApiOpcuaReqData,
-  resp: {} as ApiOpcuaReqData
+  resp: {} as ApiOpcuaReqData,
+  internalReq: {} as ApiOpcuaReqData,
+  internalResp: {} as ApiOpcuaReqData
 };
 
 

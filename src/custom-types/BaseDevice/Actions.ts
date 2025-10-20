@@ -30,6 +30,7 @@ export function actionTypeToString(actionType: ActionTypes): string {
 }
 
 export interface DeviceActionRequestData {
+  UniqueActionRequestId: number; // Unique identifier for each action request
   SenderId: number;
   ActionType: ActionTypes; // ActionTypes enum
   ActionId: number; // could be cmd, task or processId
@@ -37,6 +38,7 @@ export interface DeviceActionRequestData {
 };
 
 export const initialDeviceActionRequestData: DeviceActionRequestData = {
+  UniqueActionRequestId: 0,
   SenderId: 0,
   ActionType: 0,
   ActionId: 0,
