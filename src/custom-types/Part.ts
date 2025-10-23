@@ -13,22 +13,36 @@ import { GCs } from "./GlobalConstants";
 // END_TYPE
 
 
-// TYPE PartData :
-// STRUCT
-// 	ProcessSts:INT;//PartStates enum
-// 	Validation:PartValidationData;
-// 	LoadedBadSensor:BOOL; //marks if loaded into system with bad part present sensor
-// 	FixtureLocationWhenLoaded:INT; //LocationIds enum, where this part was loaced
-// 	CurrentLocation:INT; //LocationIds enum, this is also the same as the partIndex of the Machine.PartData[partIndex]
-// 	InFixture:BOOL; //CurrentLocation = FixtureLocationWhenLoaded
-	
-// 	//RecipeData:PartRecipeData;
-// END_STRUCT
+// TYPE PartLocationIds :
+// (
+// 	None:=0,
+// 	LeftFixture_P1 :=1,
+// 	RightFixture_P9:=LeftFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE,
+// 	RobotGripper:=RightFixture_P9 + GCs.NUM_PARTS_PER_FIXTURE,
+// 	Lost:=RobotGripper + 1
+// );
 // END_TYPE
 
-// {attribute 'qualified_only'}
-// {attribute 'strict'}
-// //Just subtract 5 from a discrete part state that, this corresponds to processing
+export enum PartLocationIds {
+    None = 0,
+    LeftFixture_P1 = 1,
+    RightFixture_P9 = LeftFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE,
+    RobotGripper = RightFixture_P9 + GCs.NUM_PARTS_PER_FIXTURE,
+    Lost = RobotGripper + 1
+};
+
+export function partLocationIdToString(locationId: PartLocationIds): string {
+    switch (locationId) {
+        case PartLocationIds.None: return "None";
+        case PartLocationIds.RobotGripper: return "Robot Gripper";
+        case PartLocationIds.LeftFixture_P1: return "Left Fixture - P" + locationId.toString();
+        case PartLocationIds.RightFixture_P9: return "Right Fixture - P" + locationId.toString();
+        case PartLocationIds.Lost: return "Lost";
+        default: 
+            return "Unknown";
+    }
+}
+
 // TYPE PartStates :
 // (
 // 	Empty:=0,//no part present
@@ -57,38 +71,6 @@ import { GCs } from "./GlobalConstants";
 	
 // );
 // END_TYPE
-
-
-// {attribute 'qualified_only'}
-// //{attribute 'strict'}
-// TYPE PartLocationIds :
-// (
-// 	None:=0,
-// 	RobotGripper:=1,
-// 	LeftFixture_P1 :=2,
-// 	RightFixture_P1:=LeftFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE,
-// 	Lost:=RightFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE
-// );
-// END_TYPE
-
-export enum PartLocationIds {
-    None = 0,
-    RobotGripper = 1,
-    LeftFixture_P1 = 2,
-    RightFixture_P1 = LeftFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE,
-    Lost = RightFixture_P1 + GCs.NUM_PARTS_PER_FIXTURE
-};
-
-export function partLocationIdToString(locationId: PartLocationIds): string {
-    switch (locationId) {
-        case PartLocationIds.None: return "None";
-        case PartLocationIds.RobotGripper: return "Robot Gripper";
-        case PartLocationIds.LeftFixture_P1: return "Left Fixture P1";
-        case PartLocationIds.RightFixture_P1: return "Right Fixture P1";
-        case PartLocationIds.Lost: return "Lost";
-        default: return "Unknown";
-    }
-}
 
 export enum PartStates {
     Empty = 0,//no part present
