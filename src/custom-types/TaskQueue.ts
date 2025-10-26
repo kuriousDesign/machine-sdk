@@ -1,15 +1,32 @@
 import { DeviceConstants } from "./BaseDevice";
 
+
+// TYPE Priorities :
+// (
+// 	NONE := 0, //do not remove or change this
+// 	RECOVER_ROBOT :=1,
+// 	LOAD_PARTS:=2,
+// 	START_POT_PRESSURIZATION:=10, //param0: explain what the parameters do here, param1: continue to explain each of them
+// 	PRE_WEIGH_TUBES:=20, //no params:
+// 	APPLY_LINER :=30,
+// 	PHOTOGRAPH_TUBES :=40,
+// 	POST_WEIGH_TUBES:=50,
+// 	START_POT_DEPRESSURIZATION:=60,
+// 	WAIT_IMAGE_INSPECTION:=70,
+// 	UNLOAD_PARTS:=80
+// );
+// END_TYPE
 export enum Priorities {
     NONE = 0, // do not remove or change this
     LOAD_PARTS = 2,
-    START_UTILITIES = 10,
+    START_POT_PRESSURIZATION = 10,
     PRE_WEIGH_TUBES = 20,
     APPLY_LINER = 30,
     PHOTOGRAPH_TUBES = 40,
     POST_WEIGH_TUBES = 50,
-    STOP_UTILITIES = 60,
-    UNLOAD_PARTS = 70
+    START_POT_DEPRESSURIZATION = 60,
+    WAIT_IMAGE_INSPECTION = 70,
+    UNLOAD_PARTS = 80
 }
 
 export function priorityToString(priority: Priorities): string {
@@ -18,8 +35,8 @@ export function priorityToString(priority: Priorities): string {
             return "None";
         case Priorities.LOAD_PARTS:
             return "Load Parts";
-        case Priorities.START_UTILITIES:
-            return "Start Utilities";
+        case Priorities.START_POT_PRESSURIZATION:
+            return "Start Pot Pressurization";
         case Priorities.PRE_WEIGH_TUBES:
             return "Pre Weigh Tubes";
         case Priorities.APPLY_LINER:
@@ -28,8 +45,8 @@ export function priorityToString(priority: Priorities): string {
             return "Photograph Tubes";
         case Priorities.POST_WEIGH_TUBES:
             return "Post Weigh Tubes";
-        case Priorities.STOP_UTILITIES:
-            return "Stop Utilities";
+        case Priorities.START_POT_DEPRESSURIZATION:
+            return "Start Pot Depressurization";
         case Priorities.UNLOAD_PARTS:
             return "Unload Parts";
         default:

@@ -42,7 +42,6 @@ export function partLocationIdToString(locationId: PartLocationIds): string {
             return "Unknown";
     }
 }
-
 // TYPE PartStates :
 // (
 // 	Empty:=0,//no part present

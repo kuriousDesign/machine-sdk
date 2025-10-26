@@ -17,6 +17,7 @@ export enum DeviceId {
   CLAMP_S = 17,
   FLSB_T = 18,
   FLSB_S = 19,
+  POT = 20,
   
   LNR = 21,
   GCNV1 = 22,
