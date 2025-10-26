@@ -47,6 +47,8 @@ export function priorityToString(priority: Priorities): string {
             return "Post Weigh Tubes";
         case Priorities.START_POT_DEPRESSURIZATION:
             return "Start Pot Depressurization";
+        case Priorities.WAIT_IMAGE_INSPECTION:
+            return "Wait Image Inspection";
         case Priorities.UNLOAD_PARTS:
             return "Unload Parts";
         default:
