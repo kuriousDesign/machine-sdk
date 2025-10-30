@@ -136,6 +136,11 @@ MODULE MainModule
 
             CASE States.IDLE:
                 desc("IDLE");
+                checkForNewTaskRequest(); --> going to read the pLC variable for task Request and those task params
+                SWITCH requestedTaskId  ! Pseudo-variable for requested task
+                CASE RobTasks.WEIGHING:
+                    PROC WeighingTask();
+                    setNextStep(States.RUNNING);
                 ! Idle logic here
                 ! check for any task requests and transition to running if so
                 ! setNextStep(States.RUNNING);

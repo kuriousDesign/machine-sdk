@@ -138,7 +138,50 @@ export function robotTaskToString(task: number): string {
 }
 
 
-export interface RobData {
+// TYPE RobSts :
+// STRUCT
+// 	Cfg:DeviceTemplateCfg; //read-only, references _cfg
+// 	ActiveToolId:INT;
+// 	ActualWaypoint:INT;
+// 	TargetWaypoint:INT;
+// 	ActualZone:INT;
+// 	WaypointPlan: RobWaypointPlan;
+// 	SqueegeeIsCalibrated:BOOL; //required once per job
+// 	SqueegeeIsHomed:BOOL; //required after every tool change
+// END_STRUCT
+// END_TYPE
+
+
+// TYPE RobWaypointPlan :
+// STRUCT
+// 	Cnt:INT;
+// 	activeIndex:INT;
+// 	list:ARRAY[0..RobConstants.MOVE_PLAN_LEN -1] OF INT;
+// END_STRUCT
+// END_TYPE
+
+export interface RobWaypointPlan {
+  cnt: number;
+  activeIndex: number;
+  list: number[];
+}
+
+
+export interface RobCfg {
+}
+
+export interface RobSts {
+  cfg: RobCfg;
+  activeToolId: number;
+  actualWaypoint: number;
+  targetWaypoint: number;
+  actualZone: number;
+  waypointPlan: RobWaypointPlan;
+  squeegeeIsCalibrated: boolean;
+  squeegeeIsHomed: boolean;
+}
+
+export interface RobDataDEPRECATED {
   zone: RobZoneData;
   pos: RobWaypoints;
   dest: RobWaypoints;

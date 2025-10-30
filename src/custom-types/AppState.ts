@@ -13,7 +13,7 @@ import {
   UserData,
   UserManagerFB,
 } from ".";
-import { RobData } from "./Devices/Robot";
+import { RobDataDEPRECATED } from "./Devices/Robot";
 
 export enum NodeId {
   // new node ids
@@ -63,7 +63,7 @@ export interface AppState {
   [NodeId.RecipeManagerPbs]: RecipeManagerPbs;
   [NodeId.UserManagerFB]: UserManagerFB;
   [NodeId.RemoteControlPage]: Page;
-  [NodeId.RobData]: RobData;
+  [NodeId.RobData]: RobDataDEPRECATED;
 }
 
 export enum InputNodeId {
