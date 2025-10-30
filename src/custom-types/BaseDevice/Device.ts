@@ -189,7 +189,10 @@ export interface Device {
   apiOpcua: ApiOpcuaData;
   log: DeviceLogData;
   //ignore--instantsudp: UdpData;
+  sts: unknown; // device specific status structure
 }
+
+export const initialSts: unknown = null;
 
 export const initialDevice: Device = {
   is: initialDeviceStatus,
@@ -203,7 +206,8 @@ export const initialDevice: Device = {
   process: initialProcessData,
   script: initialProcessData,
   apiOpcua: initialApiOpcuaData,
-  log: initialDeviceLogData
+  log: initialDeviceLogData,
+  sts: initialSts
 };
 
 // TYPE DeviceLogData :
