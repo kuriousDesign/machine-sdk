@@ -77,7 +77,7 @@ export const GCs = {
   NUM_PARTS_XFER: 10,
   NUM_PARTS_IB: 51,
   NUM_LOG_ENTRIES: 25,
-  TASK_LIST_LEN: 25,
+  TASK_LIST_LEN: 50,
   TASK_STORE_LEN: 125, //length of the array of stored (configured) tasks, the range of index 100 and greater are reserved for waypoints
   TASK_LOG_LEN: 25,
   STATION_COUNT: 6, //total number of designated areas that can hold parts: robot, raw shelf, preop, cnc, postop and done shelf 
