@@ -30,8 +30,8 @@ export const DeviceTags = {
     Process: 'Process',
     Script: 'Script',
     Registration: 'Registration',
-    ApiOpcuaHmiReq: 'ApiOpcua/HmiReq',
-    ApiOpcuaHmiResp: 'ApiOpcua/HmiResp',
+    ApiOpcuaHmiReq: 'ApiOpcua.HmiReq',
+    ApiOpcuaHmiResp: 'ApiOpcua.HmiResp',
 }
 
 export * from "./opcua";
