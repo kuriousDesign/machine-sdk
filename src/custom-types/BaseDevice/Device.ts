@@ -35,7 +35,7 @@ export interface DeviceRegistration {
   childIdArray: number[]; // array of child device ids
   parentId: number; // this is the parent id
   deviceType: DeviceTypes; // type of the device
-  devicePath?: string; // full path of the device in the machine hierarchy
+  devicePath?: string[]; // full path of the device in the machine hierarchy
 };
 
 
@@ -46,7 +46,7 @@ export const initialDeviceRegistration: DeviceRegistration = {
   childIdArray: [],
   parentId: 0,
   deviceType: DeviceTypes.Base, // Assuming Unknown exists in DeviceTypes enum
-  devicePath: ''
+  devicePath: []
 };
 
 export interface DeviceCfg {
