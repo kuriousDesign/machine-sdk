@@ -18,13 +18,16 @@ export enum DeviceId {
   FLSB_T = 18,
   FLSB_S = 19,
   POT = 20,
-  
-  LNR = 21,
-  GCNV1 = 22,
-  GCNV2 = 23,
-  ORCH = 24,
-  XFER = 25,
-  SWARM1 = 26,
+  STEPR = 21,
+	GRIP = 22,
+	WEIGH = 23,
+
+  LNR = 41,
+  GCNV1 = 42,
+  GCNV2 = 43,
+  ORCH = 44,
+  XFER = 45,
+  SWARM1 = 46,
   SWARM2 = 27,
   
   SCARA = 29,
@@ -53,4 +56,61 @@ export enum DeviceId {
   DBRR = 52,
   CNC = 53,
   RACK = 54,
+}
+
+export function deviceIdToString(deviceId: DeviceId | number): string {
+  switch (deviceId) {
+    case DeviceId.NONE: return "NONE";
+    case DeviceId.SYS: return "SYS";
+    case DeviceId.HMI: return "HMI";
+    case DeviceId.SFTY: return "SFTY";
+    case DeviceId.CON: return "CON";
+    case DeviceId.DIAG: return "DIAG";
+    case DeviceId.RC: return "RC";
+    case DeviceId.ROB: return "ROB";
+    case DeviceId.ABB: return "ABB";
+    case DeviceId.EOAT: return "EOAT";
+    case DeviceId.VIS: return "VIS";
+    case DeviceId.FIX_T: return "FIX_T";
+    case DeviceId.FIX_S: return "FIX_S";
+    case DeviceId.CLAMP_T: return "CLAMP_T";
+    case DeviceId.CLAMP_S: return "CLAMP_S";
+    case DeviceId.FLSB_T: return "FLSB_T";
+    case DeviceId.FLSB_S: return "FLSB_S";
+    case DeviceId.POT: return "POT";
+    case DeviceId.STEPR: return "STEPR";
+    case DeviceId.GRIP: return "GRIP";
+    case DeviceId.WEIGH: return "WEIGH";
+    case DeviceId.LNR: return "LNR";
+    case DeviceId.GCNV1: return "GCNV1";
+    case DeviceId.GCNV2: return "GCNV2";
+    case DeviceId.ORCH: return "ORCH";
+    case DeviceId.XFER: return "XFER";
+    case DeviceId.SWARM1: return "SWARM1";
+    case DeviceId.SWARM2: return "SWARM2";
+    case DeviceId.SCARA: return "SCARA";
+    case DeviceId.REOR: return "REOR";
+    case DeviceId.BAM: return "BAM";
+    case DeviceId.MTAC: return "MTAC";
+
+    case DeviceId.IB: return "IB";
+    case DeviceId.STW: return "STW";
+    case DeviceId.RG: return "RG";
+    case DeviceId.RY: return "RY";
+    case DeviceId.RZ: return "RZ";
+    case DeviceId.BSG: return "BSG";
+    case DeviceId.BSX: return "BSX";
+    case DeviceId.BSY: return "BSY";
+    case DeviceId.BSZ: return "BSZ";
+    case DeviceId.IBG: return "IBG";
+    case DeviceId.IBZ: return "IBZ";
+    case DeviceId.IBX: return "IBX";
+    case DeviceId.IBZ1: return "IBZ1";
+    case DeviceId.IBZ2: return "IBZ2";
+    case DeviceId.WASH: return "WASH";
+    case DeviceId.DBRR: return "DBRR";
+    case DeviceId.CNC: return "CNC";
+    case DeviceId.RACK: return "RACK";
+    default: return `UNKNOWN(${deviceId})`;
+  }
 }
