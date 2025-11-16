@@ -16,6 +16,7 @@ export const MachineTags = {
     //deviceLogs: 'DeviceLogs',
     machineLog: 'MachineLog',
     deviceLogs: 'DeviceLogs',
+    recipeStore: 'RecipeStore',
 }
 
 export const DeviceTags = {
