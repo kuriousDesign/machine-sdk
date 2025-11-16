@@ -1,5 +1,5 @@
-import { ComponentAnimation, DebugLogData, DeviceConstants, DeviceLogData, DeviceRegistration, initialDebugLogData, initialDeviceLogData, initialDeviceRegistration, initialTaskQueue, TaskQueue } from ".";
-import { initialPartDataStatus, PartData, PartDataStatus } from "./Part";
+import { ComponentAnimation, DebugLogData, DeviceConstants, DeviceRegistration, initialDebugLogData, initialRecipeStore, initialTaskQueue, RecipeStore, TaskQueue } from ".";
+import { initialPartDataStatus, PartDataStatus } from "./Part";
 import { GCs } from "./GlobalConstants";
 
 
@@ -86,6 +86,7 @@ export interface Machine {
     heartbeatPlc: number;
     heartbeatHmi: number;
     machineLog: LogRecordData;
+    recipeStore: RecipeStore;
     //deviceLogs: DeviceLogData[];  //ARRAY[0..(GCs.NUM_DEVICES-1)] OF DeviceLogData;
 }
 
@@ -124,5 +125,6 @@ export const initialMachine: Machine = ({
   heartbeatPlc: 0,
   heartbeatHmi: 0,
   machineLog: { ...initialLogRecordData },
+  recipeStore: { ...initialRecipeStore },
   //deviceLogs: Array(GCs.NUM_DEVICES).fill(null).map(() => ({ ...initialDeviceLogData })),
 });

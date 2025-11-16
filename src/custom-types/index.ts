@@ -5,7 +5,7 @@ export * from "./BaseDevice";
 export * from "./Machine";
 export * from "./RackData";
 export * from "./GlobalConstants";
-export * from "./RecipeData";
+export * from "./Recipe";
 export * from "./RecipeManagerFB";
 export * from "./UserManagerFB";
 export * from "./TaskQueue";
