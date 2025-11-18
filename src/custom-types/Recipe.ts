@@ -35,6 +35,19 @@ export enum CameraIds {
     CAMERA_3 = 3,
 }
 
+export function getCameraIdString(cameraId: CameraIds): string {
+    switch (cameraId) {
+        case CameraIds.CAMERA_1:
+            return "Camera 1";
+        case CameraIds.CAMERA_2:
+            return "Camera 2";
+        case CameraIds.CAMERA_3:
+            return "Camera 3";
+        default:
+            return "None";
+    }
+}
+
 export enum TubeTypes {
     NONE = 0,
     TYPE_11726650 = 1,
@@ -44,6 +57,27 @@ export enum TubeTypes {
     TYPE_3811302 = 5,
     TYPE_1755_037 = 6,
     TYPE_1517_038 = 7
+}
+
+export function getTubeTypeString(tubeType: TubeTypes): string {
+    switch (tubeType) {
+        case TubeTypes.TYPE_11726650:
+            return "11726650";
+        case TubeTypes.TYPE_1809_370:
+            return "1809-370";
+        case TubeTypes.TYPE_1809_126:
+            return "1809-126";
+        case TubeTypes.TYPE_1340_38:
+            return "1340-38";
+        case TubeTypes.TYPE_3811302:
+            return "3811302";
+        case TubeTypes.TYPE_1755_037:
+            return "1755-037";
+        case TubeTypes.TYPE_1517_038:
+            return "1517-038";
+        default:
+            return "None";
+    }
 }
 
 export const LinerTypes: string[] = [
