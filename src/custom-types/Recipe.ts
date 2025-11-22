@@ -37,6 +37,7 @@ export const initialApplicatorSetpoints: ApplicatorSetpoint[] = Array(GCs.MAX_AP
 
 export interface RecipeData {
     index: number; // index in RecipeStore.Recipes array
+    nickname: string; // user defined nickname for recipe
 
     tubeTypeId: number;
     tubeTypeString: string; // display purposes only
@@ -44,7 +45,7 @@ export interface RecipeData {
     falseBottomStaysOpen: boolean; // this also determines if only the tall fixture is used or not
 
     linerPotPressure: number; // PSI
-    linerType: string; // display purposes only
+    linerTypeString: string; // display purposes only
 
     applicatorSetpoints: ApplicatorSetpoint[]; // speed robot uses while applying liner
     applicatorToolId: ApplicatorTools;
@@ -185,9 +186,11 @@ export const weighingFingerStringToIdMap = new Map(
 
 
 export const exampleRecipe: RecipeData = {
-    linerType: "CKU",
-    linerPotPressure: 50,
     index: 1,
+    nickname: "Example Recipe",
+    linerTypeString: "CKU",
+    linerPotPressure: 50,
+
     tubeTypeId: TubeTypes.TYPE_1340_38,
     tubeTypeString: "1340-38",
     tubeOuterDiameterMax: 38.1,
@@ -208,7 +211,8 @@ export const exampleRecipe: RecipeData = {
 
 export const initialRecipe: RecipeData = {
     index: 0,
-    linerType: "",
+    nickname: "",
+    linerTypeString: "",
     tubeOuterDiameterMax: 0.0,
     tubeTypeId: TubeTypes.NONE,
     tubeTypeString: "",
