@@ -21,6 +21,13 @@ export interface ApplicatorSetpoint {
     ballValveOn: boolean; // whether ball valve is on or off at this setpoint
 }
 
+export const initialApplicatorSetpoint: ApplicatorSetpoint = {
+    speed: 0,
+    squeegeeDiameter: 0.0,
+    zOffset: 0.0,
+    ballValveOn: false,
+};
+
 export const exampleApplicatorSetpoints: ApplicatorSetpoint[] = [
     { speed: 100, squeegeeDiameter: 30.0, zOffset: -10.0, ballValveOn: true },
     { speed: 100, squeegeeDiameter: 30.0, zOffset: 100.0, ballValveOn: true },
