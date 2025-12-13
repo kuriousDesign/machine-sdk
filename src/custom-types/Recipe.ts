@@ -49,6 +49,7 @@ export interface RecipeData {
     tubeTypeId: number;
     tubeTypeString: string; // display purposes only
     tubeOuterDiameterMax: number; // mm, used for robot offsets in fixture
+    tubeHeightMax: number; // mm, used for approach to tubes and the pick position for weighing
     falseBottomStaysOpen: boolean; // this also determines if only the tall fixture is used or not
 
     linerPotPressure: number; // PSI
@@ -201,6 +202,7 @@ export const exampleRecipe: RecipeData = {
     tubeTypeId: TubeTypes.TYPE_1340_38,
     tubeTypeString: "1340-38",
     tubeOuterDiameterMax: 38.1,
+    tubeHeightMax: 100, // example value in mm
     falseBottomStaysOpen: false,
 
     applicatorSetpoints: exampleApplicatorSetpoints,
@@ -223,6 +225,7 @@ export const initialRecipe: RecipeData = {
     tubeOuterDiameterMax: 0.0,
     tubeTypeId: TubeTypes.NONE,
     tubeTypeString: "",
+    tubeHeightMax: 0, // example value in mm
     linerPotPressure: 0,
     applicatorSetpoints: initialApplicatorSetpoints,
     applicatorToolId: ApplicatorTools.NONE,
