@@ -1,4 +1,4 @@
-import { DeviceTypes } from '../Devices/DeviceTypes'
+import { DeviceTypes } from './DeviceTypes'
 import { initialProcessData, ProcessData } from './Processes';
 import { DeviceConstants } from './DeviceConstants';
 import { ApiOpcuaData, initialApiOpcuaData } from './ApiOpcua';
