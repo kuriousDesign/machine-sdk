@@ -20,32 +20,9 @@ npm install @kuriousdesign/machine-sdk@latest
 Usage
 import { Machine, formatTimestamp, isMachineActive } from '@kuriousdesign/machine-sdk';
 
-// Example: Machine data
-const machine: Machine = {
-  id: 'M001',
-  name: 'Conveyor',
-  status: 'running',
-  lastUpdated: new Date()
-};
-
-// Format timestamp
-console.log(formatTimestamp(machine.lastUpdated)); // e.g., "2025-08-15T22:23:00.000Z"
-
-// Check if machine is active
-console.log(isMachineActive(machine)); // true
-
-API
-Data Types
-
-Machine: Represents a machine with id, name, status, and lastUpdated.
-SensorData: Represents sensor readings with machineId, temperature, pressure, and timestamp.
-
-Helper Functions
-
-formatTimestamp(date: Date): string: Formats a Date to ISO string.
-isMachineActive(machine: Machine): boolean: Checks if a machine is running.
-calculateAverageTemperature(data: SensorData[]): number: Computes average temperature.
-validateMachineId(id: string): boolean: Validates a machine ID format.
-
-License
-MIT
+# npm registry codes for trusted publishers
+50d6d0fc3dfbe9e405a3df45959751ac4efdec8eaf718e05d390ff5ee4ac28c8
+d9e930bb97999f5b204a6f449e499906a936b57f18350ce4bc1ada267c9207c3
+07345eb11da75e1e050ddb07e81914975e90533f015567ed524f40073dedf99e
+3fb598a51fe5ead322e02a55755d19bb8790a8a886ed33c06efe020b479a27e2
+82876e59bb316170f05a92ca16b86276ccd4e31d8b272c55d79cd537aebeb631
