@@ -35,6 +35,7 @@ export interface DeviceRegistration {
   childIdArray: number[]; // array of child device ids
   parentId: number; // this is the parent id
   deviceType: DeviceTypes; // type of the device
+  isExternalService: boolean; // whether this device is an external service
   devicePath?: string[]; // full path of the device in the machine hierarchy
 };
 
@@ -46,6 +47,7 @@ export const initialDeviceRegistration: DeviceRegistration = {
   childIdArray: [],
   parentId: 0,
   deviceType: DeviceTypes.Base, // Assuming Unknown exists in DeviceTypes enum
+  isExternalService: false,
   devicePath: []
 };
 
