@@ -57,7 +57,7 @@ export const GCs = {
 
   NUM_AXES: 20,
   MAX_NUM_NAUTILUS_AXES: 20,
-  NUM_DEVICES: 50, //get this from DeviceIds
+  NUM_DEVICES: 25, //get this from DeviceIds
   //STEP_TIMEOUT: TIME := T#5000MS;
   //TIMEOUT_ERROR_CODE_SHIFT: INT:= 10000;
   MOMENTARY_PB: 250, // TIME:= T#250MS;
