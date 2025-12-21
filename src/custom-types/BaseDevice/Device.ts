@@ -191,9 +191,9 @@ export interface Device {
 
   //ignore--instantsrequests: Array<DeviceActionRequestData>; //this can be written to outside of the device fb;
   apiOpcua: ApiOpcuaData;
-  log: DeviceLogData;
+  log?: DeviceLogData; //this is taken from machine.deviceLogs[device.id]
   //ignore--instantsudp: UdpData;
-  sts: unknown; // device specific status structure
+  sts?: unknown; // this is take from Machine.<MEM>Sts
 }
 
 export const initialSts: unknown = null;

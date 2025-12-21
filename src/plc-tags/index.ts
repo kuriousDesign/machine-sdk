@@ -24,8 +24,6 @@ export const DeviceTags = {
     Is: 'Is',
     Errors: 'Errors',
     Warnings: 'Warnings',
-    Log: 'Log',
-    //ConnectionStatus: 'ConnectionStatus',
     ExecMethod: 'ExecMethod',
     Task: 'Task',
     Process: 'Process',
@@ -33,6 +31,8 @@ export const DeviceTags = {
     Registration: 'Registration',
     ApiOpcuaHmiReq: 'ApiOpcua.HmiReq',
     ApiOpcuaHmiResp: 'ApiOpcua.HmiResp',
+    ApiOpcuaPlcReq: 'ApiOpcua.InternalReq',
+    ApiOpcuaPlcResp: 'ApiOpcua.InternalResp',
 }
 
 export * from "./opcua";
