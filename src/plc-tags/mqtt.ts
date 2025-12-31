@@ -8,4 +8,5 @@ export const MqttTopics = {
     BRIDGE_CMD: 'bridge/cmd',
     DEVICE_MAP: 'deviceMap',
     HMI_ACTION_REQ: 'hmi/action_req',
+    EXT_SERVICE: 'ext_service',
 } as const;

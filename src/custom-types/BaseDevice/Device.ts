@@ -194,6 +194,8 @@ export interface Device {
   log?: DeviceLogData; //this is taken from machine.deviceLogs[device.id]
   //ignore--instantsudp: UdpData;
   sts?: unknown; // this is take from Machine.<MEM>Sts
+  inputs?: unknown;
+  outputs?: unknown;
 }
 
 export const initialSts: unknown = null;
