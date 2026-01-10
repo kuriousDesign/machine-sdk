@@ -1,4 +1,4 @@
-import { ComponentAnimation, DebugLogData, DeviceConstants, DeviceRegistration, initialDebugLogData, initialRecipeStore, initialTaskQueue, RecipeStore, TaskQueue } from ".";
+import { ComponentAnimation, DebugLogData, DeviceRegistration, FaultData, initialDebugLogData, initialFaultData, initialRecipeStore, initialTaskQueue, RecipeStore, TaskQueue } from ".";
 import { initialPartDataStatus, PartDataStatus } from "./Part";
 import { GCs } from "./GlobalConstants";
 
@@ -20,12 +20,12 @@ export const initialFaultCodeData: FaultCodeData = {
 };
 
 export interface SystemFaultData {
-  list: FaultCodeData[];
+  list: FaultData[];
   present: boolean;
 }
 
 export const initialSystemFaultData: SystemFaultData = {
-  list: Array(DeviceConstants.DEVICE_FAULTCODEARRAY_LEN).fill(null).map(() => ({ ...initialFaultCodeData })),
+  list: Array(GCs.MACHINE_FAULTCODEARRAY_LEN).fill(null).map(() => ({ ...initialFaultData })),
   present: false,
 };
 
