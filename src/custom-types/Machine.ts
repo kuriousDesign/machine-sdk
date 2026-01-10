@@ -76,6 +76,7 @@ export interface Machine {
     networkHealth_OK: boolean;
     ethercatMaster_OK: boolean;
     ethercatSlaves_OK: boolean;
+    manualMode: boolean;
     supplyAir_OK: boolean;
     cfg: MachineCfg;
     pdmSts: PartDataStatus;
@@ -115,6 +116,7 @@ export const initialMachine: Machine = ({
   networkHealth_OK: false,
   ethercatMaster_OK: false,
   ethercatSlaves_OK: false,
+  manualMode: false,
   supplyAir_OK: false,
   cfg: { ...initialMachineCfg },
   pdmSts: initialPartDataStatus,
