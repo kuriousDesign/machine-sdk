@@ -43,31 +43,42 @@ export const initialApplicatorSetpoints: ApplicatorSetpoint[] = Array(GCs.MAX_AP
 });
 
 export interface RecipeData {
-    index: number; // index in RecipeStore.Recipes array
-    nickname: string; // user defined nickname for recipe
+  index: number;
+  dbId: string; // Added to match ST/MongoDB
+  nickname: string;
+  
+  // LINER DATA
+  linerPotPressure: number;
+  linerTypeString: string;
 
-    tubeTypeId: number;
-    tubeTypeString: string; // display purposes only
-    tubeOuterDiameterMax: number; // mm, used for robot offsets in fixture
-    tubeHeightMax: number; // mm, used for approach to tubes and the pick position for weighing
-    falseBottomStaysOpen: boolean; // this also determines if only the tall fixture is used or not
+  // TUBE DATA
+  tubeTypeId: number;
+  tubeTypeString: string;
+  tubeOuterDiameterMax: number;
+  tubeHeightMax: number;
+  tubeMassKg: number; // Added: kg, used for payload adjustment
+  falseBottomStaysOpen: boolean;
 
-    linerPotPressure: number; // PSI
-    linerTypeString: string; // display purposes only
+  // APPLICATOR SETPOINTS
+  applicatorSetpoints: ApplicatorSetpoint[]; 
+  
+  // TOOLS
+  applicatorToolId: number; // Note: Ensure this matches your ApplicatorTools enum
+  applicatorToolString: string;
+  applicatorCollisionPayloadOffset: number; // Added: kg, for collision sensitivity
+  
+  cleanerId: number;
+  cleanerString: string;
+  
+  weighingFingerId: number; // Note: Ensure this matches your WeighingFingers enum
+  weighingFingerString: string;
 
-    applicatorSetpoints: ApplicatorSetpoint[]; // speed robot uses while applying liner
-    applicatorToolId: ApplicatorTools;
-    applicatorToolString: string;
-    cleanerId: number; // cleaner tool used before applying liner
-    cleanerString: string;
-
-    weighingFingerId: WeighingFingers;
-    weighingFingerString: string;
-
-    numCameras: number; // number of cameras needed to take photos of a tube
-    cameraIds: number[]; // used with NumCameras to determine how photos are taken
-    cameraSpeeds: number[]; // speed settings for robot for each camera 
+  // CAMERA DATA (New fields from ST)
+  cameraId: number;
+  cameraString: string;
+  cameraSpeed: number;
 }
+
 
 export enum CameraIds {
     NONE = 0,
@@ -198,11 +209,13 @@ export const exampleRecipe: RecipeData = {
     nickname: "Example Recipe",
     linerTypeString: "CKU",
     linerPotPressure: 50,
-
+    dbId: "",
     tubeTypeId: TubeTypes.TYPE_1340_38,
     tubeTypeString: "1340-38",
     tubeOuterDiameterMax: 38.1,
     tubeHeightMax: 100, // example value in mm
+    tubeMassKg: 0.5,
+    applicatorCollisionPayloadOffset: 1.0,
     falseBottomStaysOpen: false,
 
     applicatorSetpoints: exampleApplicatorSetpoints,
@@ -212,14 +225,16 @@ export const exampleRecipe: RecipeData = {
     cleanerString: "Medium",
     weighingFingerId: WeighingFingers.RED_MEDIUM,
     weighingFingerString: "Red Medium",
-    numCameras: 2,
-    cameraIds: [CameraIds.CAMERA_1, CameraIds.CAMERA_2],
-    cameraSpeeds: [50, 75],
+    //numCameras: 2,
+    cameraId: CameraIds.CAMERA_1,
+    cameraString: "Camera 1",
+    cameraSpeed: 50,
     
 };
 
 export const initialRecipe: RecipeData = {
     index: 0,
+    dbId: "",
     nickname: "",
     linerTypeString: "",
     tubeOuterDiameterMax: 0.0,
@@ -234,9 +249,12 @@ export const initialRecipe: RecipeData = {
     cleanerString: "",
     weighingFingerId: WeighingFingers.NONE,
     weighingFingerString: "",
-    numCameras: 0,
-    cameraIds: Array(GCs.MAX_NUM_CAMERAS).fill(CameraIds.NONE),
-    cameraSpeeds: Array(GCs.MAX_NUM_CAMERAS).fill(0),
+    //numCameras: 0,
+    cameraId: CameraIds.NONE,
+    cameraString: "",
+    cameraSpeed: 0,
+    tubeMassKg: 0,
+    applicatorCollisionPayloadOffset: 0,
     falseBottomStaysOpen: false,
 };
 
