@@ -40,6 +40,7 @@ export const DeviceTags = {
     Process: 'Process',
     Script: 'Script',
     Registration: 'Registration',
+    MutedChildrenArray: 'MutedChildrenArray',
     ApiOpcuaHmiReq: 'ApiOpcua.HmiReq',
     ApiOpcuaHmiResp: 'ApiOpcua.HmiResp',
     ApiOpcuaPlcReq: 'ApiOpcua.InternalReq',
