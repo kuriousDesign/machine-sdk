@@ -177,6 +177,7 @@ export interface Device {
   errors: DeviceFaultData;
   warnings: DeviceFaultData;
   registration: DeviceRegistration;
+  mutedChildrenArray: boolean[]; // array of muted child device ids
   cfg: DeviceCfg;
   //ignore--instants: DeviceInstants;
 
@@ -198,6 +199,9 @@ export interface Device {
   outputs?: unknown;
 }
 
+// array of muted children, initialized to false of length DeviceConstants.DEVICE_CHILDREN_ARRAY_LEN
+export const initialMutedChildrenArray: boolean[] = new Array(DeviceConstants.DEVICE_CHILDREN_ARRAY_LEN).fill(false);
+
 export const initialSts: unknown = null;
 
 export const initialDevice: Device = {
@@ -205,6 +209,7 @@ export const initialDevice: Device = {
   errors: initialDeviceFaultData,
   warnings: initialDeviceFaultData,
   registration: initialDeviceRegistration,
+  mutedChildrenArray: initialMutedChildrenArray,
   cfg: initialDeviceCfg,
   connectionStatus: false,
   execMethod: initialProcessData,
