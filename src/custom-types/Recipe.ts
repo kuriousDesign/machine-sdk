@@ -50,31 +50,31 @@ export const initialApplicatorSetpoints: ApplicatorSetpoint[] = Array.from({ len
 export interface RecipeData {
     index: number;
     dbId: string;
-    Nickname: string;
-    LinerPotPressure: number;
-    LinerTypeString: string;
-    LinerWeightMin: number;
-    LinerWeightMax: number;
-    TubeTypeId: number;
-    TubeTypeString: string;
-    TubeOuterDiameterMax: number;
-    TubeHeightMax: number;
-    TubeMassKg: number;
-    FalseBottomStaysOpen: boolean;
-    ApplicatorHasVariableSqueegee: boolean;
-    MeasuredSqueegeeDiaAtSetpoint1: number;
-    ApplicatorSetpoints: ApplicatorSetpoint[];
-    ApplicatorPreloadPauseDuration: number;
-    ApplicatorToolId: number;
-    ApplicatorToolString: string;
-    ApplicatorCollisionPayloadOffset: number;
-    CleanerId: number;
-    CleanerString: string;
-    WeighingFingerId: number;
-    WeighingFingerString: string;
-    CameraId: number;
-    CameraString: string;
-    CameraSpeed: number;
+    nickname: string;
+    linerPotPressure: number;
+    linerTypeString: string;
+    linerWeightMin: number;
+    linerWeightMax: number;
+    tubeTypeId: number;
+    tubeTypeString: string;
+    tubeOuterDiameterMax: number;
+    tubeHeightMax: number;
+    tubeMassKg: number;
+    falseBottomStaysOpen: boolean;
+    applicatorHasVariableSqueegee: boolean;
+    measuredSqueegeeDiaAtSetpoint1: number;
+    applicatorSetpoints: ApplicatorSetpoint[];
+    applicatorPreloadPauseDuration: number;
+    applicatorToolId: number;
+    applicatorToolString: string;
+    applicatorCollisionPayloadOffset: number;
+    cleanerId: number;
+    cleanerString: string;
+    weighingFingerId: number;
+    weighingFingerString: string;
+    cameraId: number;
+    cameraString: string;
+    cameraSpeed: number;
 }
 
 export enum CameraIds {
@@ -184,31 +184,31 @@ export const weighingFingerStringToIdMap: Map<string, WeighingFingers> = new Map
 export const initialRecipe: RecipeData = {
     index: 0,
     dbId: "",
-    Nickname: "",
-    LinerPotPressure: 0,
-    LinerTypeString: "",
-    LinerWeightMin: 0,
-    LinerWeightMax: 0,
-    TubeTypeId: TubeTypes.NONE,
-    TubeTypeString: tubeTypeIdToStringMap.get(TubeTypes.NONE) || "",
-    TubeOuterDiameterMax: 0,
-    TubeHeightMax: 0,
-    TubeMassKg: 0,
-    FalseBottomStaysOpen: false,
-    ApplicatorHasVariableSqueegee: false,
-    MeasuredSqueegeeDiaAtSetpoint1: 0,
-    ApplicatorSetpoints: initialApplicatorSetpoints,
-    ApplicatorPreloadPauseDuration: 0,
-    ApplicatorToolId: ApplicatorTools.NONE,
-    ApplicatorToolString: applicatorToolIdToStringMap.get(ApplicatorTools.NONE) || "",
-    ApplicatorCollisionPayloadOffset: 0,
-    CleanerId: Cleaners.NONE,
-    CleanerString: cleanerIdToStringMap.get(Cleaners.NONE) || "",
-    WeighingFingerId: WeighingFingers.NONE,
-    WeighingFingerString: weighingFingerIdToStringMap().get(WeighingFingers.NONE) || "",
-    CameraId: CameraIds.NONE,
-    CameraString: cameraIdToStringMap.get(CameraIds.NONE) || "",
-    CameraSpeed: 0
+    nickname: "",
+    linerPotPressure: 0,
+    linerTypeString: "",
+    linerWeightMin: 0,
+    linerWeightMax: 0,
+    tubeTypeId: TubeTypes.NONE,
+    tubeTypeString: tubeTypeIdToStringMap.get(TubeTypes.NONE) || "",
+    tubeOuterDiameterMax: 0,
+    tubeHeightMax: 0,
+    tubeMassKg: 0,
+    falseBottomStaysOpen: false,
+    applicatorHasVariableSqueegee: false,
+    measuredSqueegeeDiaAtSetpoint1: 0,
+    applicatorSetpoints: initialApplicatorSetpoints,
+    applicatorPreloadPauseDuration: 0,
+    applicatorToolId: ApplicatorTools.NONE,
+    applicatorToolString: applicatorToolIdToStringMap.get(ApplicatorTools.NONE) || "",
+    applicatorCollisionPayloadOffset: 0,
+    cleanerId: Cleaners.NONE,
+    cleanerString: cleanerIdToStringMap.get(Cleaners.NONE) || "",
+    weighingFingerId: WeighingFingers.NONE,
+    weighingFingerString: weighingFingerIdToStringMap().get(WeighingFingers.NONE) || "",
+    cameraId: CameraIds.NONE,
+    cameraString: cameraIdToStringMap.get(CameraIds.NONE) || "",
+    cameraSpeed: 0
 };
 
 
