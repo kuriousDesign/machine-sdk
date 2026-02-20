@@ -103,7 +103,7 @@ export enum TubeTypes {
     TYPE_1517_038 = 7
 }
 
-export declare enum ApplicatorTools {
+export enum ApplicatorTools {
     NONE = 0,
     RED = 1,
     PURPLE = 2,
