@@ -1,100 +1,96 @@
 import { GCs } from "./GlobalConstants";
 
 export interface JobData {
-    ActiveRecipeIndex: number; // used with Machine.RecipeStore.Recipes array
-    JobName: string; // this is the identifier for the specific job
-    LotQty: number; // how many parts you are supposed to make per the job request
-    GoodCnt: number; // how many good parts you've completed since starting the job
-    ScrapCnt: number; // how many parts you've scrapped since starting the job
-    SetupStartTime: bigint; // timestamp
-    SetupEndTime: bigint; // timestamp
-    SetupCompleted: boolean; // status
-    JobStartTime: bigint; // timestamp
-    JobEndTime: bigint; // timestamp
+    ActiveRecipeIndex: number;
+    JobName: string;
+    LotQty: number;
+    GoodCnt: number;
+    ScrapCnt: number;
+    SetupStartTime: bigint;
+    SetupEndTime: bigint;
+    SetupCompleted: boolean;
+    JobStartTime: bigint;
+    JobEndTime: bigint;
     JobComplete: boolean;
 }
 
+export const initialJobData: JobData = {
+    ActiveRecipeIndex: 0,
+    JobName: "",
+    LotQty: 0,
+    GoodCnt: 0,
+    ScrapCnt: 0,
+    SetupStartTime: BigInt(0),
+    SetupEndTime: BigInt(0),
+    SetupCompleted: false,
+    JobStartTime: BigInt(0),
+    JobEndTime: BigInt(0),
+    JobComplete: false
+};
+
 export interface ApplicatorSetpoint {
-    speed: number; // speed robot uses while applying liner
-    squeegeeDiameter: number; // mm of Inner Diameter
-    zOffset: number; // mm of Distance relative to false bottom
-    ballValveOn: boolean; // whether ball valve is on or off at this setpoint
+    speed: number;
+    squeegeeDiameter: number;
+    stepperPosition: number;
+    zOffset: number;
+    ballValveOn: boolean;
 }
 
 export const initialApplicatorSetpoint: ApplicatorSetpoint = {
     speed: 0,
-    squeegeeDiameter: 0.0,
-    zOffset: 0.0,
-    ballValveOn: false,
+    squeegeeDiameter: 0,
+    stepperPosition: 0,
+    zOffset: 0,
+    ballValveOn: false
 };
 
-export const exampleApplicatorSetpoints: ApplicatorSetpoint[] = [
-    { speed: 100, squeegeeDiameter: 30.0, zOffset: -10.0, ballValveOn: true },
-    { speed: 100, squeegeeDiameter: 30.0, zOffset: 100.0, ballValveOn: true },
-    { speed: 150, squeegeeDiameter: 28.5, zOffset: 200.0, ballValveOn: true },
-    { speed: 200, squeegeeDiameter: 27.0, zOffset: 300.0, ballValveOn: false },
-];
 
-export const initialApplicatorSetpoints: ApplicatorSetpoint[] = Array(GCs.MAX_APPLICATOR_SETPOINTS).fill({
-    speed: 0,
-    squeegeeDiameter: 0.0,
-    zOffset: 0.0,
-    ballValveOn: false,
-});
+export const initialApplicatorSetpoints: ApplicatorSetpoint[] = Array.from({ length: GCs.MAX_APPLICATOR_SETPOINTS }, () => initialApplicatorSetpoint);
 
 export interface RecipeData {
-  index: number;
-  dbId: string; // Added to match ST/MongoDB
-  nickname: string;
-  
-  // LINER DATA
-  linerPotPressure: number;
-  linerTypeString: string;
-
-  // TUBE DATA
-  tubeTypeId: number;
-  tubeTypeString: string;
-  tubeOuterDiameterMax: number;
-  tubeHeightMax: number;
-  tubeMassKg: number; // Added: kg, used for payload adjustment
-  falseBottomStaysOpen: boolean;
-
-  // APPLICATOR SETPOINTS
-  applicatorSetpoints: ApplicatorSetpoint[]; 
-  
-  // TOOLS
-  applicatorToolId: number; // Note: Ensure this matches your ApplicatorTools enum
-  applicatorToolString: string;
-  applicatorCollisionPayloadOffset: number; // Added: kg, for collision sensitivity
-  
-  cleanerId: number;
-  cleanerString: string;
-  
-  weighingFingerId: number; // Note: Ensure this matches your WeighingFingers enum
-  weighingFingerString: string;
-
-  // CAMERA DATA (New fields from ST)
-  cameraId: number;
-  cameraString: string;
-  cameraSpeed: number;
+    index: number;
+    dbId: string;
+    Nickname: string;
+    LinerPotPressure: number;
+    LinerTypeString: string;
+    LinerWeightMin: number;
+    LinerWeightMax: number;
+    TubeTypeId: number;
+    TubeTypeString: string;
+    TubeOuterDiameterMax: number;
+    TubeHeightMax: number;
+    TubeMassKg: number;
+    FalseBottomStaysOpen: boolean;
+    ApplicatorHasVariableSqueegee: boolean;
+    MeasuredSqueegeeDiaAtSetpoint1: number;
+    ApplicatorSetpoints: ApplicatorSetpoint[];
+    ApplicatorPreloadPauseDuration: number;
+    ApplicatorToolId: number;
+    ApplicatorToolString: string;
+    ApplicatorCollisionPayloadOffset: number;
+    CleanerId: number;
+    CleanerString: string;
+    WeighingFingerId: number;
+    WeighingFingerString: string;
+    CameraId: number;
+    CameraString: string;
+    CameraSpeed: number;
 }
-
 
 export enum CameraIds {
     NONE = 0,
-    CAMERA_1 = 1,
-    CAMERA_2 = 2,
-    CAMERA_3 = 3,
+    STANDARD = 1, //typical camera
+    LONG = 2, //only used for really long tubes
 }
 
-export const cameraIdToStringMap = new Map<CameraIds, string>([
+export const cameraIdToStringMap: Map<CameraIds, string> = new Map<CameraIds, string>([
     [CameraIds.NONE, "None"],
-    [CameraIds.CAMERA_1, "Camera 1"],
-    [CameraIds.CAMERA_2, "Camera 2"],
-    [CameraIds.CAMERA_3, "Camera 3"],
+    [CameraIds.STANDARD, "Standard"],
+    [CameraIds.LONG, "Long"]
 ]);
-
-export const cameraStringToIdMap = new Map<string, CameraIds>(Array.from(cameraIdToStringMap.entries()).map(([id, str]) => [str, id]));
+export const cameraStringToIdMap: Map<string, CameraIds> = new Map<string, CameraIds>(
+    Array.from(cameraIdToStringMap.entries()).map(([key, value]) => [value, key])
+);
 
 export enum TubeTypes {
     NONE = 0,
@@ -107,7 +103,18 @@ export enum TubeTypes {
     TYPE_1517_038 = 7
 }
 
-export const tubeTypeIdToStringMap = new Map<number, string>([
+export declare enum ApplicatorTools {
+    NONE = 0,
+    RED = 1,
+    PURPLE = 2,
+    ORANGE = 3,
+    YELLOW = 4,
+    WHITE = 5,
+    GREEN = 6,
+    BLUE = 7,
+}
+
+export const tubeTypeIdToStringMap: Map<number, string> = new Map<number, string>([
     [TubeTypes.NONE, "None"],
     [TubeTypes.TYPE_11726650, "11726650"],
     [TubeTypes.TYPE_1809_370, "1809-370"],
@@ -115,155 +122,101 @@ export const tubeTypeIdToStringMap = new Map<number, string>([
     [TubeTypes.TYPE_1340_38, "1340-38"],
     [TubeTypes.TYPE_3811302, "3811302"],
     [TubeTypes.TYPE_1755_037, "1755-037"],
-    [TubeTypes.TYPE_1517_038, "1517-038"],
+    [TubeTypes.TYPE_1517_038, "1517-038"]
 ]);
 
-export const tubeTypeStringToIdMap = new Map<string, number>(Array.from(tubeTypeIdToStringMap.entries()).map(([id, str]) => [str, id]));
-
+export const tubeTypeStringToIdMap: Map<string, number> = new Map<string, number>(
+    Array.from(tubeTypeIdToStringMap.entries()).map(([key, value]) => [value, key])
+);
 export function getTubeTypeString(tubeType: TubeTypes): string {
-    switch (tubeType) {
-        case TubeTypes.TYPE_11726650:
-            return "11726650";
-        case TubeTypes.TYPE_1809_370:
-            return "1809-370";
-        case TubeTypes.TYPE_1809_126:
-            return "1809-126";
-        case TubeTypes.TYPE_1340_38:
-            return "1340-38";
-        case TubeTypes.TYPE_3811302:
-            return "3811302";
-        case TubeTypes.TYPE_1755_037:
-            return "1755-037";
-        case TubeTypes.TYPE_1517_038:
-            return "1517-038";
-        default:
-            return "None";
-    }
+    return tubeTypeIdToStringMap.get(tubeType) || "Unknown";
 }
-
 export const LinerTypes: string[] = [
     "CKU",
-    "Tribrid",
-    "1755",
-];
+    "TRIBRID",
+    "1755 LINER",
+]
 
-export enum ApplicatorTools {
-    NONE = 0,
-    RED_37_INCH = 1,
-    ORANGE_LARGE = 2,
-    YELLOW_MEDIUM = 3,
-    GREEN_SMALL = 4,
-    BLUE_F16 = 5
-}
-
-
-
-export const applicatorToolIdToStringMap = new Map<ApplicatorTools, string>([
+export const applicatorToolIdToStringMap: Map<ApplicatorTools, string> = new Map<ApplicatorTools, string>([
     [ApplicatorTools.NONE, "None"],
-    [ApplicatorTools.RED_37_INCH, "Red 3/7 Inch"],
-    [ApplicatorTools.BLUE_F16, "Blue F16"],
-    [ApplicatorTools.GREEN_SMALL, "Green Small"],
-    [ApplicatorTools.ORANGE_LARGE, "Orange Large"],
-    [ApplicatorTools.YELLOW_MEDIUM, "Yellow Medium"],
+    [ApplicatorTools.RED, "Red"],
+    [ApplicatorTools.PURPLE, "Purple"],
+    [ApplicatorTools.ORANGE, "Orange"],
+    [ApplicatorTools.YELLOW, "Yellow"],
+    [ApplicatorTools.WHITE, "White"],
+    [ApplicatorTools.GREEN, "Green"],
+    [ApplicatorTools.BLUE, "Blue"],
 ]);
-
-export const applicatorToolStringToIdMap = new Map<string, ApplicatorTools>(Array.from(applicatorToolIdToStringMap.entries()).map(([id, str]) => [str, id]));
-
+export const applicatorToolStringToIdMap: Map<string, ApplicatorTools> = new Map<string, ApplicatorTools>(
+    Array.from(applicatorToolIdToStringMap.entries()).map(([key, value]) => [value, key])
+);
 export enum Cleaners {
     NONE = 0,
     SMALL = 1,
     MEDIUM = 2,
     LARGE = 3
 }
-
-export const cleanerIdToStringMap = new Map<Cleaners, string>([
+export const cleanerIdToStringMap: Map<Cleaners, string> = new Map<Cleaners, string>([
     [Cleaners.NONE, "None"],
     [Cleaners.SMALL, "Small"],
     [Cleaners.MEDIUM, "Medium"],
-    [Cleaners.LARGE, "Large"],
+    [Cleaners.LARGE, "Large"]
 ]);
-
-export const cleanerStringToIdMap = new Map<string, Cleaners>(Array.from(cleanerIdToStringMap.entries()).map(([id, str]) => [str, id]));
-
+export const cleanerStringToIdMap: Map<string, Cleaners> = new Map<string, Cleaners>(
+    Array.from(cleanerIdToStringMap.entries()).map(([key, value]) => [value, key])
+);
 export enum WeighingFingers {
     NONE = 0,
     BLUE_SMALL = 1,
     RED_MEDIUM = 2,
-    ORANGE_LARGE = 3,
+    ORANGE_LARGE = 3
 }
-
-export const weighingFingerIdToStringMap = new Map<WeighingFingers, string>([
+export const weighingFingerIdToStringMap = (): Map<WeighingFingers, string> => new Map<WeighingFingers, string>([
     [WeighingFingers.NONE, "None"],
-    [WeighingFingers.RED_MEDIUM, "Red Medium"],
-    [WeighingFingers.ORANGE_LARGE, "Orange Large"],
     [WeighingFingers.BLUE_SMALL, "Blue Small"],
+    [WeighingFingers.RED_MEDIUM, "Red Medium"],
+    [WeighingFingers.ORANGE_LARGE, "Orange Large"]
 ]);
-
-export const weighingFingerStringToIdMap = new Map(
-    Array.from(weighingFingerIdToStringMap.entries()).map(([id, str]) => [str, id])
+export const weighingFingerStringToIdMap: Map<string, WeighingFingers> = new Map<string, WeighingFingers>(
+    Array.from(weighingFingerIdToStringMap().entries()).map(([key, value]) => [value, key])
 );
-
-
-export const exampleRecipe: RecipeData = {
-    index: 1,
-    nickname: "Example Recipe",
-    linerTypeString: "CKU",
-    linerPotPressure: 50,
-    dbId: "",
-    tubeTypeId: TubeTypes.TYPE_1340_38,
-    tubeTypeString: "1340-38",
-    tubeOuterDiameterMax: 38.1,
-    tubeHeightMax: 100, // example value in mm
-    tubeMassKg: 0.5,
-    applicatorCollisionPayloadOffset: 1.0,
-    falseBottomStaysOpen: false,
-
-    applicatorSetpoints: exampleApplicatorSetpoints,
-    applicatorToolId: ApplicatorTools.RED_37_INCH,
-    applicatorToolString: "Red 3/7 Inch",
-    cleanerId: Cleaners.MEDIUM,
-    cleanerString: "Medium",
-    weighingFingerId: WeighingFingers.RED_MEDIUM,
-    weighingFingerString: "Red Medium",
-    //numCameras: 2,
-    cameraId: CameraIds.CAMERA_1,
-    cameraString: "Camera 1",
-    cameraSpeed: 50,
-    
-};
 
 export const initialRecipe: RecipeData = {
     index: 0,
     dbId: "",
-    nickname: "",
-    linerTypeString: "",
-    tubeOuterDiameterMax: 0.0,
-    tubeTypeId: TubeTypes.NONE,
-    tubeTypeString: "",
-    tubeHeightMax: 0, // example value in mm
-    linerPotPressure: 0,
-    applicatorSetpoints: initialApplicatorSetpoints,
-    applicatorToolId: ApplicatorTools.NONE,
-    applicatorToolString: "",
-    cleanerId: Cleaners.NONE,
-    cleanerString: "",
-    weighingFingerId: WeighingFingers.NONE,
-    weighingFingerString: "",
-    //numCameras: 0,
-    cameraId: CameraIds.NONE,
-    cameraString: "",
-    cameraSpeed: 0,
-    tubeMassKg: 0,
-    applicatorCollisionPayloadOffset: 0,
-    falseBottomStaysOpen: false,
+    Nickname: "",
+    LinerPotPressure: 0,
+    LinerTypeString: "",
+    LinerWeightMin: 0,
+    LinerWeightMax: 0,
+    TubeTypeId: TubeTypes.NONE,
+    TubeTypeString: tubeTypeIdToStringMap.get(TubeTypes.NONE) || "",
+    TubeOuterDiameterMax: 0,
+    TubeHeightMax: 0,
+    TubeMassKg: 0,
+    FalseBottomStaysOpen: false,
+    ApplicatorHasVariableSqueegee: false,
+    MeasuredSqueegeeDiaAtSetpoint1: 0,
+    ApplicatorSetpoints: initialApplicatorSetpoints,
+    ApplicatorPreloadPauseDuration: 0,
+    ApplicatorToolId: ApplicatorTools.NONE,
+    ApplicatorToolString: applicatorToolIdToStringMap.get(ApplicatorTools.NONE) || "",
+    ApplicatorCollisionPayloadOffset: 0,
+    CleanerId: Cleaners.NONE,
+    CleanerString: cleanerIdToStringMap.get(Cleaners.NONE) || "",
+    WeighingFingerId: WeighingFingers.NONE,
+    WeighingFingerString: weighingFingerIdToStringMap().get(WeighingFingers.NONE) || "",
+    CameraId: CameraIds.NONE,
+    CameraString: cameraIdToStringMap.get(CameraIds.NONE) || "",
+    CameraSpeed: 0
 };
+
 
 export interface RecipeStore {
     numRecipes: number;
     recipes: RecipeData[];
 }
-
 export const initialRecipeStore: RecipeStore = {
-    numRecipes: 2,
-    recipes: Array(GCs.MAX_NUM_RECIPES).fill(exampleRecipe),
+    numRecipes: GCs.MAX_NUM_RECIPES,
+    recipes: Array(GCs.MAX_NUM_RECIPES).fill(initialRecipe)
 };

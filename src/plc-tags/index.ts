@@ -17,6 +17,7 @@ export const MachineTags = {
     machineLog: 'MachineLog',
     deviceLogs: 'DeviceLogs',
     recipeStore: 'RecipeStore',
+    job: 'Job',
     errors: 'Errors',
     warnings: 'Warnings',
     estopCircuitDelayed_OK: 'EstopCircuitDelayed_OK',
