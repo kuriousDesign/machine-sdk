@@ -29,6 +29,7 @@ export const MachineTags = {
 	networkHealth_OK: 'NetworkHealth_OK',
 	ethercatMaster_OK: 'EthercatMaster_OK',
 	ethercatSlaves_OK: 'EthercatSlaves_OK',
+    currentTimeMs: 'CurrentTimeMs',
 }
 
 export const DeviceTags = {

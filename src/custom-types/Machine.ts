@@ -1,4 +1,4 @@
-import { ComponentAnimation, DebugLogData, DeviceRegistration, FaultData, initialDebugLogData, initialFaultData, initialJobData, initialRecipeStore, initialTaskQueue, JobData, RecipeStore, TaskQueue } from ".";
+import { ComponentAnimation, DebugLogData, DeviceRegistration, FaultData, initialDebugLogData, initialFaultData, initialJobData, initialRecipe, initialRecipeStore, initialTaskQueue, JobData, RecipeData, RecipeStore, TaskQueue } from ".";
 import { initialPartDataStatus, PartDataStatus } from "./Part";
 import { GCs } from "./GlobalConstants";
 
@@ -90,6 +90,9 @@ export interface Machine {
     recipeStore: RecipeStore;
     job: JobData;
     //deviceLogs: DeviceLogData[];  //ARRAY[0..(GCs.NUM_DEVICES-1)] OF DeviceLogData;
+    currentTimeMs: number;
+    activeUserId: number;
+    activeRecipe: RecipeData;
 }
 
 // TYPE LogRecordData :
@@ -131,4 +134,7 @@ export const initialMachine: Machine = ({
   recipeStore: { ...initialRecipeStore },
   job: { ...initialJobData },
   //deviceLogs: Array(GCs.NUM_DEVICES).fill(null).map(() => ({ ...initialDeviceLogData })),
+  currentTimeMs: 0,
+  activeUserId: 0,
+  activeRecipe: { ...initialRecipe},
 });
