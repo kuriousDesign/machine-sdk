@@ -18,7 +18,7 @@ export enum DeviceId {
   FLSB_T = 18,
   FLSB_S = 19,
   POT = 20,
-  STEPR = 21,
+  SQUEE = 21,
 	GRIP = 22,
 	WEIGH = 23,
 
@@ -78,7 +78,7 @@ export function deviceIdToString(deviceId: DeviceId | number): string {
     case DeviceId.FLSB_T: return "FLSB_T";
     case DeviceId.FLSB_S: return "FLSB_S";
     case DeviceId.POT: return "POT";
-    case DeviceId.STEPR: return "STEPR";
+    case DeviceId.SQUEE: return "SQUEE";
     case DeviceId.GRIP: return "GRIP";
     case DeviceId.WEIGH: return "WEIGH";
     case DeviceId.LNR: return "LNR";

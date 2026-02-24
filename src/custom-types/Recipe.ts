@@ -1,31 +1,31 @@
 import { GCs } from "./GlobalConstants";
 
 export interface JobData {
-    ActiveRecipeIndex: number;
-    JobName: string;
-    LotQty: number;
-    GoodCnt: number;
-    ScrapCnt: number;
-    SetupStartTime: bigint;
-    SetupEndTime: bigint;
-    SetupCompleted: boolean;
-    JobStartTime: bigint;
-    JobEndTime: bigint;
-    JobComplete: boolean;
+    activeRecipeIndex: number;
+    jobName: string;
+    lotQty: number;
+    goodCnt: number;
+    scrapCnt: number;
+    setupStartTime: bigint;
+    setupEndTime: bigint;
+    setupCompleted: boolean;
+    jobStartTime: bigint;
+    jobEndTime: bigint;
+    jobComplete: boolean;
 }
 
 export const initialJobData: JobData = {
-    ActiveRecipeIndex: 0,
-    JobName: "",
-    LotQty: 0,
-    GoodCnt: 0,
-    ScrapCnt: 0,
-    SetupStartTime: BigInt(0),
-    SetupEndTime: BigInt(0),
-    SetupCompleted: false,
-    JobStartTime: BigInt(0),
-    JobEndTime: BigInt(0),
-    JobComplete: false
+    activeRecipeIndex: 0,
+    jobName: "",
+    lotQty: 0,
+    goodCnt: 0,
+    scrapCnt: 0,
+    setupStartTime: BigInt(0),
+    setupEndTime: BigInt(0),
+    setupCompleted: false,
+    jobStartTime: BigInt(0),
+    jobEndTime: BigInt(0),
+    jobComplete: false
 };
 
 export interface ApplicatorSetpoint {
