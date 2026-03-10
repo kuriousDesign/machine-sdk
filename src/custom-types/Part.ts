@@ -116,18 +116,34 @@ export interface PartData {
     inFixture: boolean; // CurrentLocation = FixtureLocationWhenLoaded
 }
 
+export enum PartValidationStates {
+    NONE = 0,
+    Scrapped_Generic = 1,
+    Scrapped_LINER_APPLICATION_STARTED_BUT_NOT_FINISHED = 101,
+    Scrapped_Failed_Weight_TOO_LIGHT = 701,
+    Scrapped_Failed_Weight_TOO_HEAVY = 702,
+    Scrapped_Failed_Image_Review_GENERAL = 800,
+    Scrapped_Failed_Image_Review_GAPS_IN_SMEAR = 801,
+    Scrapped_Failed_Image_Review_BUBBLES = 802,
+    PASSED = 1000
+}
+
 export interface PartValidationData {
-    state: number; // PartStates enum
-    preWeightKg: number; // LREAL
-    postWeightKg: number; // LREAL
-    linerWeightKg: number; // LREAL
+    valState: PartValidationStates;
+    statusMsg: string;
+    preWeightKg: number;
+    postWeightKg: number;
+    linerWeightKg: number;
+    videoReviewSts: number; //0: NOT REVIEWED, 911: FAILED, 1000: PASSED
 }
 
 export const initialPartValidationData: PartValidationData = {
-    state: -1,
-    preWeightKg: -1,
-    postWeightKg: -1,
-    linerWeightKg: -1,
+    valState: PartValidationStates.NONE,
+    statusMsg: "",
+    preWeightKg: 0,
+    postWeightKg: 0,
+    linerWeightKg: 0,
+    videoReviewSts: 0,
 };
 export const initialPartData: PartData = {
     processSts: PartStates.Empty,
@@ -138,36 +154,6 @@ export const initialPartData: PartData = {
     inFixture: false,
 };
 
-// TYPE PartDataStatus :
-// STRUCT
-// 	Parts: ARRAY[0..GCs.PARTDATA_COUNT-1] OF PartData; //uses PartLocationIds, but lost parts get added to the end of known locations
-// 	AllStationsAreEmpty:BOOL;
-// 	RawShelfIsEmpty:BOOL;
-// 	DoneShelfIsEmpty:BOOL;
-// 	DoneShelfIsFull:BOOL;
-// 	DoneShelfSpacesLeftCnt:INT;
-// 	RawShelfPartsLeftCnt:INT;
-// 	AllFixturesAreEmpty:BOOL;
-// 	LeftFixtureIsEmpty:BOOL;
-// 	RightFixtureIsEmpty:BOOL;
-
-// 	RobotIsEmpty:BOOL;
-// 	RobotHasNoPostOpParts:BOOL; //robot isn't holding any parts that are machined or washing/dryed or finished
-// 	RobotHasMachinedParts:BOOL; //robot is holding at least one machined part
-// 	RobotHasOnePreTopDeburring:BOOL;
-// 	RobotHasOnePreMachining:BOOL;
-// 	RobotHasTwoPreMachining:BOOL;
-// 	RobotHasOneRaw:BOOL;
-
-// 	OneOrMoreRejectPartsInCell:BOOL;// there is a reject part in the robot, preop OR post op (doesn't look at cnc)
-// 	OneOrMoreRejectPartsInRobot:BOOL;
-
-// 	RobotHasOneFinishedPart:BOOL;
-// 	FinishedCnt:INT;//amount of finished parts either in post op or in robot
-// 	ActiveCnt:INT;//how many active parts are in the cell, cnc or robot (does not include raw or done rack)
-// 	BatchCntFlag:BOOL; //prevent more parts from being picked by raw
-// END_STRUCT
-// END_TYPE
 export interface PartDataStatus {
     parts: PartData[];
     allStationsAreEmpty: boolean;
