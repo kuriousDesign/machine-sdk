@@ -1,8 +1,12 @@
 import { GCs } from "./GlobalConstants";
 
+
 export interface JobData {
     activeRecipeIndex: number;
     jobName: string;
+    tubeTypeString: string;
+    activeBatchNumber: number;
+
     lotQty: number;
     goodCnt: number;
     scrapCnt: number;
@@ -17,6 +21,8 @@ export interface JobData {
 export const initialJobData: JobData = {
     activeRecipeIndex: 0,
     jobName: "",
+    tubeTypeString: "",
+    activeBatchNumber: 0,
     lotQty: 0,
     goodCnt: 0,
     scrapCnt: 0,
