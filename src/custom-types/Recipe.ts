@@ -2,27 +2,35 @@ import { GCs } from "./GlobalConstants";
 
 
 export interface JobData {
-    activeRecipeIndex: number;
-    jobName: string;
+    activeRecipeIndex: number; //used with Machine.RecipeStore.Recipes array
+    jobName: string; //this is the identifier for the specific job
     tubeTypeString: string;
-    activeBatchNumber: number;
-
-    lotQty: number;
-    goodCnt: number;
-    scrapCnt: number;
-    setupStartTime: bigint;
-    setupEndTime: bigint;
-    setupCompleted: boolean;
-    jobStartTime: bigint;
-    jobEndTime: bigint;
+    lotQty: number; //how many parts you are supposed to make per the job request
+    goodCnt: number; //how many good parts you've completed since starting the job
+    scrapCnt: number; //how many parts you've scrapped since starting the job
+    setupStartTime: bigint; //timestamp
+    setupEndTime: bigint;//timestamp
+    setupCompleted: boolean;//status
+    jobStartTime: bigint;//timestamp
+    jobEndTime: bigint;//timestamp
     jobComplete: boolean;
+    activeBatchNumber: number; //this probably needs to change to activeHeatId
+    //heatId: string;
+    batchId: string;
+    workOrderId: string;
+    lotId: string;
+    salesOrderId: string;
+    assemblyName : string;
+    assemblyNumber : string;
+    workInstruction : string;
+    operationNumber : string;
+    operatorId: string; //uses collins employeeId
 }
 
 export const initialJobData: JobData = {
     activeRecipeIndex: 0,
-    jobName: "",
-    tubeTypeString: "",
-    activeBatchNumber: 0,
+    jobName: '',
+    tubeTypeString: '',
     lotQty: 0,
     goodCnt: 0,
     scrapCnt: 0,
@@ -31,7 +39,18 @@ export const initialJobData: JobData = {
     setupCompleted: false,
     jobStartTime: BigInt(0),
     jobEndTime: BigInt(0),
-    jobComplete: false
+    jobComplete: false,
+    activeBatchNumber: 0,
+    //heatId: '',
+    batchId: '',
+    workOrderId: '',
+    lotId: '',
+    salesOrderId: '',
+    assemblyName : '',
+    assemblyNumber : '',
+    workInstruction : '',
+    operationNumber : '',
+    operatorId: '',
 };
 
 export interface ApplicatorSetpoint {
@@ -54,29 +73,37 @@ export const initialApplicatorSetpoint: ApplicatorSetpoint = {
 export const initialApplicatorSetpoints: ApplicatorSetpoint[] = Array.from({ length: GCs.MAX_APPLICATOR_SETPOINTS }, () => initialApplicatorSetpoint);
 
 export interface RecipeData {
-    index: number;
-    dbId: string;
-    nickname: string;
-    linerPotPressure: number;
-    linerTypeString: string;
+    index: number; //same as index in Machine.RecipeStore.Recipes
+    dbId: string; //mongodb identifier for recipe
+    nickname: string; //unique nickname for the recipe
+
+    // LINER DATA
+    linerPotPressure: number; //psi
+    linerTypeString: string; //display purposes only
     linerWeightMin: number;
     linerWeightMax: number;
-    tubeTypeId: number;
-    tubeTypeString: string;
-    tubeOuterDiameterMax: number;
-    tubeHeightMax: number;
-    tubeMassKg: number;
-    falseBottomStaysOpen: boolean;
+
+    // TUBE DATA
+    tubeTypeId: number; //ROBOT
+    tubeTypeString: string; //display purposes only
+    tubeOuterDiameterMax: number; //mm, used for robot offsets in fixture  <ROBOT>
+    tubeHeightMax: number; //mm, used for approach to tubes and the pick position for weighing <ROBOT>
+    tubeMassKg: number; //kg, used for payload adjustment when gripping tubes
+    falseBottomStaysOpen: boolean; //this also determines if only the tall fixture is used or not  <ROBOT>
+
+    // APPLICATOR SETPOINTS
     applicatorHasVariableSqueegee: boolean;
-    measuredSqueegeeDiaAtSetpoint1: number;
-    applicatorSetpoints: ApplicatorSetpoint[];
-    applicatorPreloadPauseDuration: number;
-    applicatorToolId: number;
+    measuredSqueegeeDiaAtSetpoint1: number;//set after calibration
+    applicatorSetpoints: ApplicatorSetpoint[]; // <ROBOT>
+    applicatorPreloadPauseDuration: number; //pause it takes after opening ball valve for the first move
+
+    // TOOLS
+    applicatorToolId: number; // <ROBOT> --> this would link to TCP number in the ABB Code
     applicatorToolString: string;
-    applicatorCollisionPayloadOffset: number;
-    cleanerId: number;
+    applicatorCollisionPayloadOffset: number; //kg, used to set the collision detection sensitivity during liner application, gripLoad cmd used to add artificial payload
+    cleanerId: number; // <ROBOT>
     cleanerString: string;
-    weighingFingerId: number;
+    weighingFingerId: number; // <ROBOT> --> this would link to TCP number in the ABB Code
     weighingFingerString: string;
     cameraId: number;
     cameraString: string;
