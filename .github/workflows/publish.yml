@@ -15,16 +15,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      # Step 1: Install Node first WITHOUT registry config
+      - name: Setup Node.js (Basic)
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          registry-url: 'https://npmjs.org'
 
-      # Fix: Use a specific, stable npm version (11.1.0) 
-      # instead of @latest to avoid the Node 22.22.2 regression bug.
+      # Step 2: Upgrade npm while it's still using the public registry
       - name: Update npm
         run: npm install -g npm@11.1.0
+
+      # Step 3: Re-run setup-node to configure the registry for publishing
+      - name: Configure Registry
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
