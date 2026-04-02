@@ -1,24 +1,25 @@
 export enum DeviceId {
-  NONE = 0,
-  SYS = 1,
-  HMI = 2,
-  SFTY = 3,
-  CON = 4,
-  DIAG = 5,
-  RC = 6,
-  
-  ROB = 10,
-  ABB = 11,
-  EOAT = 12,
-  VIS = 13,
-  FIX_T = 14,
-  FIX_S = 15,
-  CLAMP_T = 16,
-  CLAMP_S = 17,
-  FLSB_T = 18,
-  FLSB_S = 19,
-  POT = 20,
-  SQUEE = 21,
+    NONE = 0,       // Represents no device selected or invalid state
+    SYS = 1,
+    HMI = 2,
+    SFTY = 3,
+    CON = 4,
+	DIAG = 5,
+	UDP = 6, //Robot Controller
+	// 0 - 9 ARE RESERVED FOR SYSTEM LEVEL STUFF
+	
+	ROB = 10,
+	ABB = 11,
+	EOAT = 12,
+	VIS = 13,
+	FIX_T = 14,
+	FIX_S = 15,
+	CLAMP_T = 16,
+	CLAMP_S = 17,
+	FLSB_T = 18,
+	FLSB_S = 19,
+	POT = 20,
+	SQUEE = 21,
 	GRIP = 22,
 	WEIGH = 23,
 
@@ -66,7 +67,7 @@ export function deviceIdToString(deviceId: DeviceId | number): string {
     case DeviceId.SFTY: return "SFTY";
     case DeviceId.CON: return "CON";
     case DeviceId.DIAG: return "DIAG";
-    case DeviceId.RC: return "RC";
+    case DeviceId.UDP: return "UDP";
     case DeviceId.ROB: return "ROB";
     case DeviceId.ABB: return "ABB";
     case DeviceId.EOAT: return "EOAT";

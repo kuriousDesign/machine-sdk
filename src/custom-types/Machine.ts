@@ -68,6 +68,45 @@ export const initialMachineCfg: MachineCfg = {
   ethernetAdapterList: [],
 };
 
+
+
+export interface SettingsExpert {
+  overridesEnabled: boolean;
+  autoLogoutTime: number; // expert user will be automatically logged-out after this time
+  //skipDeburrBottom: boolean; // skip deburr bottom
+  //skipDeburrTop: boolean; // skip deburr top
+  expertStaysLoggedIn: boolean;
+  dryCycle: boolean; // when true, this will run the machine through the cycle without dispensing or curing to allow for testing and setup
+}
+
+export const initialSettingsExpert: SettingsExpert = {
+  overridesEnabled: false,
+  autoLogoutTime: 15, // default to 15 minutes
+  //skipDeburrBottom: false,
+  //skipDeburrTop: false,
+  expertStaysLoggedIn: false,
+  dryCycle: false,
+};
+
+
+
+export interface SettingsAllUsers {
+  placeholderBool: boolean;
+}
+export const initialSettingsAllUsers: SettingsAllUsers = {
+  placeholderBool: false,
+};
+
+export interface Settings {
+  allUsers: SettingsAllUsers;
+  expert: SettingsExpert;
+}
+
+export const initialSettings: Settings = {
+  allUsers: { ...initialSettingsAllUsers },
+  expert: { ...initialSettingsExpert },
+};
+
 export interface Machine {
     estopCircuit_OK: boolean;
     estopCircuitDelayed_OK: boolean;
@@ -93,6 +132,7 @@ export interface Machine {
     currentTimeMs: number;
     activeUserId: number;
     activeRecipe: RecipeData;
+    settings: Settings;
 }
 
 // TYPE LogRecordData :
@@ -137,4 +177,5 @@ export const initialMachine: Machine = ({
   currentTimeMs: 0,
   activeUserId: 0,
   activeRecipe: { ...initialRecipe},
+  settings: { ...initialSettings },
 });

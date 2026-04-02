@@ -30,6 +30,7 @@ export const MachineTags = {
 	ethercatMaster_OK: 'EthercatMaster_OK',
 	ethercatSlaves_OK: 'EthercatSlaves_OK',
     currentTimeMs: 'CurrentTimeMs',
+    settings: 'Settings',
 }
 
 export const DeviceTags = {
