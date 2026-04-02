@@ -6,7 +6,7 @@ on:
       - master
 
 permissions:
-  id-token: write  # Required for OIDC
+  id-token: write  # Required for OIDC / Trusted Publishing
   contents: read
 
 jobs:
@@ -15,22 +15,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Step 1: Install Node first WITHOUT registry config
-      - name: Setup Node.js (Basic)
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          # Use the trailing slash to ensure correct .npmrc matching
+          registry-url: 'https://registry.npmjs.org/'
 
-      # Step 2: Upgrade npm while it's still using the public registry
-      - name: Update npm
-        run: npm install -g npm@11.1.0
-
-      # Step 3: Re-run setup-node to configure the registry for publishing
-      - name: Configure Registry
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          registry-url: 'https://registry.npmjs.org'
+      - name: Fix npm & Debug Auth
+        # 1. Update to a stable version known to work with Node 22
+        # 2. Use --registry to avoid 403 errors from the runner's temp config
+        # 3. Check 'whoami' to verify the secret is actually working
+        run: |
+          npm install -g npm@11.1.0 --registry=https://registry.npmjs.org/
+          echo "Checking authentication status..."
+          npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies
         run: npm ci
@@ -39,6 +40,7 @@ jobs:
         run: npm run build --if-present
 
       - name: Publish to npm
-        run: npm publish
+        # Using --access public is safer for scoped packages (@user/pkg)
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
