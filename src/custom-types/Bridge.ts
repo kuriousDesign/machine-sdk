@@ -7,3 +7,9 @@ export enum BridgeCmds {
 export interface BridgeData {
     connectedClients: number[];
 }
+
+export interface KioskControlData {
+    controlMode?: string;
+    isControlled?: boolean;
+    allowedKioskIds?: string[];
+}
