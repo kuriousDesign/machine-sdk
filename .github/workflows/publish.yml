@@ -1,3 +1,4 @@
+# .github/workflows/publish.yml
 name: Publish Package
 
 on:
@@ -6,7 +7,6 @@ on:
       - master
 
 permissions:
-  id-token: write  # Required for OIDC
   contents: read
 
 jobs:
@@ -20,9 +20,10 @@ jobs:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
 
-      # Ensure npm 11.5.1 or later is installed
-      # - name: Update npm
-      #   run: npm install -g npm@latest
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm publish
+
+      - name: Publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
