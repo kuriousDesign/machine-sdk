@@ -13,3 +13,9 @@ export interface KioskControlData {
     isControlled?: boolean;
     allowedKioskIds?: string[];
 }
+
+export const initialKioskControlData: KioskControlData = {
+    controlMode: "kiosk",
+    isControlled: false,
+    allowedKioskIds: [],
+};
