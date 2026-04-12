@@ -2,12 +2,39 @@ import { ComponentAnimation, DebugLogData, DeviceRegistration, FaultData, initia
 import { initialPartDataStatus, PartDataStatus } from "./Part";
 import { GCs } from "./GlobalConstants";
 
+export enum Users {
+  OPERATOR = 0,
+  EXPERT = 1,
+}
+
+export function userIdToString(userId: number): string {
+  switch (userId) {
+    case Users.OPERATOR:
+      return "Operator";
+    case Users.EXPERT:
+      return "Expert";
+    default:
+      return "Unknown";
+  }
+}
 
 export interface UserData {
   activeUser: number;
-  hmiLoginBtn: ComponentAnimation;
-  hmiLogoutBtn: ComponentAnimation;
+  login_REQ: boolean;
+  logout_REQ: boolean;
+  username: string;
+  password: string;
+  timeLeftBeforeAutoLogout_MIN: number;
 }
+
+export const initialUserData: UserData = {
+  activeUser: 0,
+  login_REQ: false,
+  logout_REQ: false,
+  username: "",
+  password: "",
+  timeLeftBeforeAutoLogout_MIN: 0,
+};
 
 export interface FaultCodeData {
   deviceId: number;
@@ -28,24 +55,6 @@ export const initialSystemFaultData: SystemFaultData = {
   list: Array(GCs.MACHINE_FAULTCODEARRAY_LEN).fill(null).map(() => ({ ...initialFaultData })),
   present: false,
 };
-
-
-
-// TYPE MachineCfg :
-// STRUCT
-// 	FirmwareVersion: STRING;
-// 	CellType: CellTypes;
-// 	SoftwareMode: SoftwareModes;
-// 	AllowAnonymousControl: BOOL;
-// 	DeviceIsBypassed: ARRAY[0..(GCs.NUM_DEVICES-1)] OF BOOL; //used to set devices to be bypassed or not
-// 	ApiOpcuaDeviceId:INT; //designates which device is using the opcua api
-// 	EthernetAdapterList: ARRAY[0..4] OF INT;
-// 	//SerialNumber: STRING(255); moved to ControllerInstanceData
-// 	//Name: STRING; moved to ControllerInstanceData
-// 	//Location: STRING; moved to ControllerInstanceData
-	
-// END_STRUCT
-// END_TYPE
 
 
 export interface MachineCfg {
@@ -133,6 +142,7 @@ export interface Machine {
     activeUserId: number;
     activeRecipe: RecipeData;
     settings: Settings;
+    user: UserData;
 }
 
 // TYPE LogRecordData :
@@ -178,4 +188,5 @@ export const initialMachine: Machine = ({
   activeUserId: 0,
   activeRecipe: { ...initialRecipe},
   settings: { ...initialSettings },
+  user: { ...initialUserData },
 });

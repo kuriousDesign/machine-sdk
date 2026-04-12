@@ -31,6 +31,7 @@ export const MachineTags = {
 	ethercatSlaves_OK: 'EthercatSlaves_OK',
     currentTimeMs: 'CurrentTimeMs',
     settings: 'Settings',
+    user: 'User',
 }
 
 export const DeviceTags = {
