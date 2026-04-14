@@ -111,6 +111,7 @@ export interface RecipeData {
 
     usesBrushTool: boolean;
 	brushToolSpeed_RPM: number;
+	robotSpeedWhileBrushing: number;
 }
 
 export enum CameraIds {
@@ -240,6 +241,7 @@ export const initialRecipe: RecipeData = {
     applicatorCollisionPayloadOffset: 0,
     usesBrushTool: false,
     brushToolSpeed_RPM: 0,
+    robotSpeedWhileBrushing: 0,
     cleanerId: Cleaners.NONE,
     cleanerString: cleanerIdToStringMap.get(Cleaners.NONE) || "",
     weighingFingerId: WeighingFingers.NONE,

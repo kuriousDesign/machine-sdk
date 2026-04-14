@@ -167,7 +167,8 @@ export enum AxisMethods {
     ENFORCE_RAIL_BRAKES = 4,
     START_STREAM = 5,
     STOP = 6,
-    SET_IS_HOMED = 7
+    SET_IS_HOMED = 7,
+    MOVE_REL_CMD = 8
 }
 
 export function axisMethodIdToString(method: AxisMethods): string {
@@ -188,6 +189,8 @@ export function axisMethodIdToString(method: AxisMethods): string {
             return "Stop";
         case AxisMethods.SET_IS_HOMED:
             return "Set isHomed";
+        case AxisMethods.MOVE_REL_CMD:
+            return "Move Relative Command";
 
         default:
             return "Unknown";
