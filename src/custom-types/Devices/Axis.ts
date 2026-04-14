@@ -166,7 +166,8 @@ export enum AxisMethods {
     MOVE_OP_MIN_MAX = 3,
     ENFORCE_RAIL_BRAKES = 4,
     START_STREAM = 5,
-    STOP = 6
+    STOP = 6,
+    SET_IS_HOMED = 7
 }
 
 export function axisMethodIdToString(method: AxisMethods): string {
@@ -185,6 +186,9 @@ export function axisMethodIdToString(method: AxisMethods): string {
             return "Start Stream";
         case AxisMethods.STOP:
             return "Stop";
+        case AxisMethods.SET_IS_HOMED:
+            return "Set isHomed";
+
         default:
             return "Unknown";
     }
