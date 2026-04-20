@@ -42,51 +42,33 @@ export function partLocationIdToString(locationId: PartLocationIds): string {
             return "Unknown";
     }
 }
-// TYPE PartStates :
-// (
-// 	Empty:=0,//no part present
-// 	//BadSensorEmpty:=1, //used if sensors give false positive
-	
-// 	UnvalidatedRaw:=10, //used if registered by sensor, but not approved by operator
 
-// 	Raw:=20,
-// 	//BadSensorRaw:=21, //used if loaded by sensor didn't work
-	
-// 	StartedPreWeighing:=29,
-// 	PreWeighed:=30,
-	
-// 	StartedApplying:=31,
-// 	Applied:=40,
-	
-// 	StartedPhotographing:=61,
-// 	Photographed:=70,
-	
-// 	StartedPostWeighing:=71,
-// 	PostWeighed:=80,
-	
-// 	Failed:=911,
-// 	Passed:=1000 //ProessingDone, back in fixture and waiting to be unloaded
-
-	
-// );
-// END_TYPE
 
 export enum PartStates {
     Empty = 0,//no part present
-    //BadSensorEmpty = 1, //used if sensors give false positive
     UnvalidatedRaw = 10, //used if registered by sensor, but not approved by operator
+
     Raw = 20,
-    //BadSensorRaw = 21, //used if loaded by sensor didn't work
+    
     StartedPreWeighing = 29,
     PreWeighed = 30,
+    
     StartedApplying = 31,
-    Applied = 40,
+    LinerApplied = 40,
+    
+    StartedLinerBrushing = 41,
+    LinerBrushed = 50,
+    
     StartedPhotographing = 61,
     Photographed = 70,
+    
     StartedPostWeighing = 71,
     PostWeighed = 80,
+    
+    Scrapped = 900,
     Failed = 911,
-    Passed = 1000 //ProessingDone, back in fixture and waiting to be unloaded
+    Passed = 1000 //ProessingDone, back in fixture and waiting to be unloaded   
+
 };
 
 export function partStateToString(state: PartStates): string {
@@ -97,11 +79,14 @@ export function partStateToString(state: PartStates): string {
         case PartStates.StartedPreWeighing: return "Started Pre-Weighing";
         case PartStates.PreWeighed: return "Pre-Weighed";
         case PartStates.StartedApplying: return "Started Applying";
-        case PartStates.Applied: return "Applied";
+        case PartStates.LinerApplied: return "Liner Applied";
+        case PartStates.StartedLinerBrushing: return "Started Liner Brushing";
+        case PartStates.LinerBrushed: return "Liner Brushed";
         case PartStates.StartedPhotographing: return "Started Photographing";
         case PartStates.Photographed: return "Photographed";
         case PartStates.StartedPostWeighing: return "Started Post-Weighing";
         case PartStates.PostWeighed: return "Post-Weighed";
+        case PartStates.Scrapped: return "Scrapped";
         case PartStates.Failed: return "Failed";
         case PartStates.Passed: return "Passed";
     }
@@ -116,10 +101,13 @@ export interface PartData {
     inFixture: boolean; // CurrentLocation = FixtureLocationWhenLoaded
 }
 
+
+
 export enum PartValidationStates {
     NONE = 0,
     Scrapped_Generic = 1,
     Scrapped_LINER_APPLICATION_STARTED_BUT_NOT_FINISHED = 101,
+    Scrapped_LINER_BRUSHING_STARTED_BUT_NOT_FINISHED = 102,
     Scrapped_Failed_Weight_TOO_LIGHT = 701,
     Scrapped_Failed_Weight_TOO_HEAVY = 702,
     Scrapped_Failed_Image_Review_GENERAL = 800,
@@ -128,22 +116,25 @@ export enum PartValidationStates {
     PASSED = 1000
 }
 
+
 export interface PartValidationData {
-    valState: PartValidationStates;
+    weightSts: PartValidationStates; //use PartValidationStates
+    visionSts: PartValidationStates; //use PartValidationStates
+    timestampVision_sec: number;
     statusMsg: string;
     preWeightKg: number;
     postWeightKg: number;
     linerWeightKg: number;
-    videoReviewSts: number; //0: NOT REVIEWED, 911: FAILED, 1000: PASSED
 }
 
 export const initialPartValidationData: PartValidationData = {
-    valState: PartValidationStates.NONE,
+    weightSts: PartValidationStates.NONE,
+    visionSts: PartValidationStates.NONE,
+    timestampVision_sec: 0,
     statusMsg: "",
     preWeightKg: 0,
     postWeightKg: 0,
     linerWeightKg: 0,
-    videoReviewSts: 0,
 };
 export const initialPartData: PartData = {
     processSts: PartStates.Empty,
