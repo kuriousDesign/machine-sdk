@@ -6,6 +6,7 @@ export enum DeviceId {
     CON = 4,
 	DIAG = 5,
 	UDP = 6, //Robot Controller
+  FEED = 7,
 	// 0 - 9 ARE RESERVED FOR SYSTEM LEVEL STUFF
 	
 	ROB = 10,
@@ -68,6 +69,7 @@ export function deviceIdToString(deviceId: DeviceId | number): string {
     case DeviceId.CON: return "CON";
     case DeviceId.DIAG: return "DIAG";
     case DeviceId.UDP: return "UDP";
+    case DeviceId.FEED: return "FEED";
     case DeviceId.ROB: return "ROB";
     case DeviceId.ABB: return "ABB";
     case DeviceId.EOAT: return "EOAT";
