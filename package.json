@@ -4,6 +4,9 @@
   "description": "Shared data types and helpers for machine-related repositories",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "engines": {
+    "node": "22.21.1"
+  },
   "scripts": {
     "build": "tsc && copyfiles -u 1 \"styles/**/*\" dist/styles",
     "prepublishOnly": "npm run build",
