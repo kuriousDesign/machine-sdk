@@ -101,8 +101,6 @@ export interface PartData {
     inFixture: boolean; // CurrentLocation = FixtureLocationWhenLoaded
 }
 
-
-
 export enum PartValidationStates {
     NONE = 0,
     Scrapped_Generic = 1,
@@ -111,15 +109,17 @@ export enum PartValidationStates {
     Scrapped_Failed_Weight_TOO_LIGHT = 701,
     Scrapped_Failed_Weight_TOO_HEAVY = 702,
     Scrapped_Failed_Image_Review_GENERAL = 800,
-    Scrapped_Failed_Image_Review_GAPS_IN_SMEAR = 801,
+    Scrapped_Failed_Image_Review_GAPS_IN_SMEAR = 801, //SCRAPING
     Scrapped_Failed_Image_Review_BUBBLES = 802,
     PASSED = 1000
 }
 
 
+
 export interface PartValidationData {
-    weightSts: PartValidationStates; //use PartValidationStates
-    visionSts: PartValidationStates; //use PartValidationStates
+    serialNumber: string;
+    weightSts: PartValidationStates;
+    visionSts: PartValidationStates;
     timestampVision_sec: number;
     statusMsg: string;
     preWeightKg: number;
@@ -128,6 +128,7 @@ export interface PartValidationData {
 }
 
 export const initialPartValidationData: PartValidationData = {
+    serialNumber: "",
     weightSts: PartValidationStates.NONE,
     visionSts: PartValidationStates.NONE,
     timestampVision_sec: 0,
