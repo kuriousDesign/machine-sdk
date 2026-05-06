@@ -118,6 +118,7 @@ export interface DeviceStatus {
   running: boolean; // performing an active task (excludes tasks that just involve data exchange like recipe changing)
   stopping: boolean;
   paused: boolean; // action paused mid-task, able to be resumed (finish the task) or stopped (abandon task and back to idle or inactive)
+  pauseRequested: boolean; // command to pause has been sent, but device hasn't paused yet
   aborting: boolean; // Aborting (Reacting TO E-Stop)
   done: boolean; // finished with task, waiting for parent to drop the request
   manual: boolean;
@@ -154,6 +155,7 @@ export const initialDeviceStatus: DeviceStatus = {
   running: false,
   stopping: false,
   paused: false,
+  pauseRequested: false,
   aborting: false,
   done: false,
   manual: false,
