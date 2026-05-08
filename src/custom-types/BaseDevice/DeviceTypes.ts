@@ -30,7 +30,8 @@ export enum DeviceTypes {
     Vision = 10,
     TwoPos = 11,
     TwoPosGantry = 12,
-    ExtService = 13
+    ExtService = 13,
+    Hmi = 14,
 }
 
 export function deviceTypeToString(deviceType: DeviceTypes): string {
@@ -59,6 +60,8 @@ export function deviceTypeToString(deviceType: DeviceTypes): string {
             return 'Two Position Gantry';
         case DeviceTypes.ExtService:
             return 'External Service';
+        case DeviceTypes.Hmi:
+            return 'HMI';
         default:
             return 'Unknown';
     }
