@@ -1,25 +1,27 @@
+import { DeviceRegistration } from "../custom-types";
+
 export const PlcNamespaces = {
     Machine: 'Machine',
-    MachineHw: 'MachineHw',
-    Main: 'Main'
+    //MachineHw: 'MachineHw',
+    //Main: 'Main'
 }
 
-export const MachineTags = {
-    deviceStore: 'Devices',
-    //deviceTypeStore: 'DeviceTypes',
+// these data tags are consistent machine to machine, and should only be read by the bridge during initial bootstrap, not included in the ongoing polling surface
+export const BaseMachineBootstrapTags = {
+    cfg: 'Cfg',
     registeredDevices: 'RegisteredDevices',
-    axisStsArray: 'AxisStsArray',
-    HeartbeatPLC: 'HeartbeatPLC',
-    HeartbeatHMI: 'HeartbeatHMI',
-    parts: 'Parts',
-    taskQueue: 'TaskQueue',
-    //deviceLogs: 'DeviceLogs',
+}
+
+// these data tags are consistent machine to machine, and should be included in the ongoing polling/monitoring surface
+export const BaseMachinePollingTags = {
+    heartbeatPLC: 'HeartbeatPLC',
+    heartbeatHMI: 'HeartbeatHMI',
     machineLog: 'MachineLog',
-    deviceLogs: 'DeviceLogs',
-    recipeStore: 'RecipeStore',
-    job: 'Job',
+    //deviceLogs: 'DeviceLogs',
+
     errors: 'Errors',
     warnings: 'Warnings',
+    estopCircuit_OK: 'EstopCircuit_OK',
     estopCircuitDelayed_OK: 'EstopCircuitDelayed_OK',
     fenceCircuit_OK: 'FenceCircuit_OK',
     guardDoors_LOCKED: 'GuardDoors_LOCKED',
@@ -34,8 +36,16 @@ export const MachineTags = {
     user: 'User',
 }
 
-export const DeviceTags = {
-    Cfg: 'Cfg',
+// these data tags are more project-specific, and may not be present on all machines, but if they are present, the bridge should include them in the ongoing polling surface
+export const ProjectMachinePollingTags = (projectId: string) => ({
+    TaskQueue: getProjectMachineTag(projectId) + '.TaskQueue',
+    RecipeStore: getProjectMachineTag(projectId) + '.RecipeStore',
+    Job: getProjectMachineTag(projectId) + '.Job',
+    PdmSts: getProjectMachineTag(projectId) + '.PdmSts',
+});
+
+// these are all the tags that belong to machine.devices.*, which are dynamically discovered during bootstrap and included in the ongoing polling surface if they exist
+export const BaseDevicePollingTags = {
     Is: 'Is',
     Errors: 'Errors',
     Warnings: 'Warnings',
@@ -43,13 +53,33 @@ export const DeviceTags = {
     Task: 'Task',
     Process: 'Process',
     Script: 'Script',
-    Registration: 'Registration',
     MutedChildrenArray: 'MutedChildrenArray',
     ApiOpcuaHmiReq: 'ApiOpcua.HmiReq',
     ApiOpcuaHmiResp: 'ApiOpcua.HmiResp',
     ApiOpcuaPlcReq: 'ApiOpcua.InternalReq',
     ApiOpcuaPlcResp: 'ApiOpcua.InternalResp',
 }
+
+export const BaseDeviceBootstrapTags = {
+    Cfg: 'Cfg',
+    Registration: 'Registration',
+}
+
+// optional device tags that dont live in Device data struct, ths should take in mnemonic as an input argument
+
+export function getProjectMachineTag(projectId: string): string {
+    return `Machine_${projectId}`;
+}
+
+export const OptionalDeviceBootstrapTags = (deviceRegistration: DeviceRegistration, projectId: string) => ({
+    Cfg: getProjectMachineTag(projectId) + '.' + deviceRegistration.mnemonic + 'Cfg',
+});
+
+export const OptionalDevicePollingTags = (deviceRegistration: DeviceRegistration, projectId: string) => ({
+    Cfg: getProjectMachineTag(projectId) + '.' + deviceRegistration.mnemonic + 'Cfg',
+    Log: 'Machine.DeviceLogs[' + deviceRegistration.id + ']',
+    Sts: getProjectMachineTag(projectId) + '.' + deviceRegistration.mnemonic + 'Sts',
+});
 
 export * from "./opcua";
 export * from "./mqtt";

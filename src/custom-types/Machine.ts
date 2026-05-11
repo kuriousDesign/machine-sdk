@@ -57,11 +57,24 @@ export const initialSystemFaultData: SystemFaultData = {
 };
 
 
+export enum CellTypes {
+  UNKNOWN = 0,
+  APOLLO_00251_TUBELINER = 101,
+  APOLLO_00225_SAW = 102,
+}
+
+export enum SoftwareModes {
+  DEV = 0, //Purpose: FOR building, testing, AND debugging. Characteristics: Verbose logging to track issues. Debugging tools enabled (e.g., stack traces, error messages). Mock services or test databases may be used. Fewer optimizations, as performance isn't the main focus. Features in development may be accessible.
+  PRODUCTION =1 //For end-users or live deployment
+}
+
 export interface MachineCfg {
+  machineId: string;
   firmwareVersion: string;
-  cellType: string;
-  softwareMode: string;
-  allowAnonymousControl: boolean;
+  cellType: CellTypes;
+  numRegisteredDevices: number;
+  softwareMode: SoftwareModes;
+  allowAnonymousControl: boolean; 
   deviceIsBypassed: boolean[];
   apiOpcuaDeviceId: number;
   ethernetAdapterList: number[];
@@ -69,15 +82,15 @@ export interface MachineCfg {
 
 export const initialMachineCfg: MachineCfg = {
   firmwareVersion: "",
-  cellType: "",
-  softwareMode: "",
+  cellType: CellTypes.UNKNOWN,
+  machineId: "",
+  numRegisteredDevices: 0,
+  softwareMode: SoftwareModes.DEV,
   allowAnonymousControl: false,
   deviceIsBypassed: [],
   apiOpcuaDeviceId: -1,
   ethernetAdapterList: [],
 };
-
-
 
 export interface SettingsExpert {
   overridesEnabled: boolean;
