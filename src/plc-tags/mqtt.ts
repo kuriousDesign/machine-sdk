@@ -6,6 +6,7 @@ export interface TopicData {
 export const MqttTopics = {
     BRIDGE_STATUS: 'bridge/status',
     BRIDGE_CMD: 'bridge/cmd',
+    BRIDGE_CACHE: 'bridge/cache',
     KIOSK_CONTROL: 'bridge/control',
     DEVICE_MAP: 'deviceMap',
     HMI_ACTION_REQ: 'hmi/action_req',

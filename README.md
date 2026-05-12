@@ -5,6 +5,9 @@ don't forget that tags need to start with lowercase
 # npm install @kuriousdesign/machine-sdk
 A shared SDK for data types and helper functions used in machine-related repositories.
 
+# Local Development Workflow
+See [README.local-development.md](README.local-development.md) for the local SDK workflow with machine-bridge, including when to rebuild the SDK, when to rerun bridge installs, and how to switch the bridge between local and published SDK sources.
+
 # Publishing to npm
 first, commit you git changes
 npm login (if not already)
