@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "tsc && copyfiles -u 1 \"styles/**/*\" dist/styles",
+    "update-ui-repo": "npm run build && node ./scripts/update-ui-repo.js",
     "prepublishOnly": "npm run build",
     "publish:npm": "npm publish",
     "release:patch": "npm version patch && npm publish",
