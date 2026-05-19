@@ -76,9 +76,11 @@ export const OptionalDeviceBootstrapTags = (deviceRegistration: DeviceRegistrati
 });
 
 export const OptionalDevicePollingTags = (deviceRegistration: DeviceRegistration, projectId: string) => ({
-    Cfg: getProjectMachineTag(projectId) + '.' + deviceRegistration.mnemonic + 'Cfg',
+    //Cfg: getProjectMachineTag(projectId) + '.' + deviceRegistration.mnemonic + 'Cfg',
     Log: 'Machine.DeviceLogs[' + deviceRegistration.id + ']',
     Sts: getProjectMachineTag(projectId) + '.' + deviceRegistration.mnemonic + 'Sts',
+    Inputs: getProjectMachineTag(projectId) + '.inputs.' + deviceRegistration.mnemonic,
+    Outputs: getProjectMachineTag(projectId) + '.outputs.' + deviceRegistration.mnemonic,
 });
 
 export * from "./opcua";
