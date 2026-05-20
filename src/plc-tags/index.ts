@@ -40,6 +40,7 @@ export const BaseMachinePollingTags = {
 export const ProjectMachinePollingTags = (projectId: string) => ({
     TaskQueue: getProjectMachineTag(projectId) + '.TaskQueue',
     RecipeStore: getProjectMachineTag(projectId) + '.RecipeStore',
+    ActiveRecipe: getProjectMachineTag(projectId) + '.ActiveRecipe',
     Job: getProjectMachineTag(projectId) + '.Job',
     PdmSts: getProjectMachineTag(projectId) + '.PdmSts',
 });
