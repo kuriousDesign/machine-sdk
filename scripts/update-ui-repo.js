@@ -65,10 +65,15 @@ function writeVendorReadme() {
 }
 
 function packVendorPackage() {
-  const packedFileName = execFileSync('npm', ['pack', '--silent'], {
-    cwd: vendorRoot,
-    encoding: 'utf8',
-  }).trim();
+  const packedFileName = process.platform === 'win32'
+    ? execFileSync('cmd.exe', ['/d', '/s', '/c', 'npm pack --silent'], {
+        cwd: vendorRoot,
+        encoding: 'utf8',
+      }).trim()
+    : execFileSync('npm', ['pack', '--silent'], {
+        cwd: vendorRoot,
+        encoding: 'utf8',
+      }).trim();
 
   const packedFilePath = path.join(vendorRoot, packedFileName);
   fs.rmSync(vendorTarballPath, { force: true });
