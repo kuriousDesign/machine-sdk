@@ -70,7 +70,36 @@ export const initialApplicatorSetpoint: ApplicatorSetpoint = {
 };
 
 
-export const initialApplicatorSetpoints: ApplicatorSetpoint[] = Array.from({ length: GCs.MAX_APPLICATOR_SETPOINTS }, () => initialApplicatorSetpoint);
+export function createInitialApplicatorSetpoint(): ApplicatorSetpoint {
+    return { ...initialApplicatorSetpoint };
+}
+
+export function createInitialApplicatorSetpoints(
+    length: number = GCs.MAX_APPLICATOR_SETPOINTS,
+): ApplicatorSetpoint[] {
+    return Array.from({ length }, () => createInitialApplicatorSetpoint());
+}
+
+export function normalizeApplicatorSetpoints(
+    setpoints?: ApplicatorSetpoint[] | null,
+    targetLength: number = GCs.MAX_APPLICATOR_SETPOINTS,
+): ApplicatorSetpoint[] {
+    const normalizedSetpoints = (setpoints ?? [])
+        .slice(0, targetLength)
+        .map((setpoint) => ({
+            ...initialApplicatorSetpoint,
+            ...setpoint,
+        }));
+
+    while (normalizedSetpoints.length < targetLength) {
+        normalizedSetpoints.push(createInitialApplicatorSetpoint());
+    }
+
+    return normalizedSetpoints;
+}
+
+
+export const initialApplicatorSetpoints: ApplicatorSetpoint[] = createInitialApplicatorSetpoints();
 
 export interface RecipeData {
     index: number; //same as index in Machine.RecipeStore.Recipes
@@ -234,7 +263,7 @@ export const initialRecipe: RecipeData = {
     falseBottomStaysOpen: false,
     applicatorHasVariableSqueegee: false,
     measuredSqueegeeDiaAtSetpoint1: 0,
-    applicatorSetpoints: initialApplicatorSetpoints,
+    applicatorSetpoints: createInitialApplicatorSetpoints(),
     applicatorPreloadPauseDuration: 0,
     applicatorToolId: ApplicatorTools.NONE,
     applicatorToolString: applicatorToolIdToStringMap.get(ApplicatorTools.NONE) || "",
@@ -250,6 +279,26 @@ export const initialRecipe: RecipeData = {
     cameraString: cameraIdToStringMap.get(CameraIds.NONE) || "",
     cameraSpeed: 0
 };
+
+export function normalizeRecipeData<T extends Pick<RecipeData, "applicatorSetpoints">>(
+    recipe: T,
+): T {
+    return {
+        ...recipe,
+        applicatorSetpoints: normalizeApplicatorSetpoints(recipe.applicatorSetpoints),
+    };
+}
+
+export function normalizeRecipeStoreData<
+    T extends {
+        recipes: Array<Pick<RecipeData, "applicatorSetpoints">>;
+    },
+>(recipeStore: T): T {
+    return {
+        ...recipeStore,
+        recipes: recipeStore.recipes.map((recipe) => normalizeRecipeData(recipe)),
+    };
+}
 
 
 export interface RecipeStore {
