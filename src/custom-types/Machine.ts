@@ -61,6 +61,7 @@ export enum CellTypes {
   UNKNOWN = 0,
   APOLLO_00251_TUBELINER = 101,
   APOLLO_00225_SAW = 102,
+  APOLLO_00254_TLX = 103,
 }
 
 export enum SoftwareModes {
