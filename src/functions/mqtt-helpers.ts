@@ -1,6 +1,11 @@
 import { DeviceRegistration } from "../custom-types";
+import { getMachineTopicRoot } from "../plc-tags/mqtt";
 
-export function buildFullTopicPath(device: DeviceRegistration, deviceMap: Map<number, DeviceRegistration>): string {
+export function buildFullTopicPath(
+    device: DeviceRegistration,
+    deviceMap: Map<number, DeviceRegistration>,
+    machineId?: string,
+): string {
     const parts: number[] = [];
     let current: DeviceRegistration | undefined = device;
 
@@ -17,5 +22,7 @@ export function buildFullTopicPath(device: DeviceRegistration, deviceMap: Map<nu
         current = parent;
     }
 
-    return 'machine/' + parts.join('/');
+    const topicRoot = machineId ? getMachineTopicRoot(machineId) : 'machine';
+
+    return `${topicRoot}/${parts.join('/')}`;
 }
