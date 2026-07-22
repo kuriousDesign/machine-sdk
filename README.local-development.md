@@ -158,19 +158,18 @@ cd /opt/repos/machine-bridge && npm run deps:install
 - `machine-bridge/scripts/sync-sdk-dependency.js`
 - `machine-bridge/README.md`
 
-## Updating machine-ui-heroui-shadcn For Turbopack
+## Updating machine-ui-heroui-shadcn
 
-`machine-ui-heroui-shadcn` uses Turbopack more reliably when the SDK package is copied into the UI repo instead of symlinked from `file:../machine-sdk`.
+`machine-ui-heroui-shadcn` now consumes the local SDK directly from `file:../machine-sdk`.
 
 Use this workflow after changing SDK code that the UI needs:
 
 ```bash
 cd /opt/repos/machine-sdk
-npm run update-ui-repo
+npm run build
 
 cd /opt/repos/machine-ui-heroui-shadcn
-npm install
 npm run dev
 ```
 
-This copies the built SDK package into `machine-ui-heroui-shadcn/vendor/machine-sdk`, packs it to `machine-ui-heroui-shadcn/vendor/machine-sdk.tgz`, and lets the UI install from that tarball so npm places a real copied package in `node_modules` instead of a symlink.
+If UI dependencies changed, run `npm install` in `machine-ui-heroui-shadcn`.
